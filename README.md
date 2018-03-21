@@ -1,1 +1,1 @@
-# osard.github.io
+This is a simple online app to keep scores.
