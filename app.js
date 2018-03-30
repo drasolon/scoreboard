@@ -1,35 +1,25 @@
-const http = require('http');
-const url = require('url');
-const fs = require('fs');
-const qs = require('querystring');
+const express = require('express');
+const pug = require('pug');
+const app = express();
 
-http.createServer((req, res) => {
-  let q = url.parse(req.url, true);
-  let filename = "." + req.url;
+app.set('view engine', 'pug');
+app.use(express.static('views'));
+app.use(express.json());
+app.use(express.urlencoded());
 
-  if (req.method === 'POST') {
-    if (req.url === '/players.html') {
-      let body = [];
-
-      req.on('error', (err) => {
-        console.error(err);
-      }).on('data', (data) => {
-        body += data;
-      }).on('end', () => {
-        let formData = qs.parse(body);
-        console.log(formData);
-      });
-
-    }
-  };
-
-  fs.readFile(filename, (err, data) => {
-    if (err) {
-      res.writeHead(404, { 'Content-Type': 'text/html' });
-      return res.end("404 Not Found");
-    }
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write(data);
-    return res.end();
-  });
-}).listen(8080);
+app.post('/players', (req, res) => {
+  console.log(req.body);
+  res.render('players')
+});
+app.get('/header', function (req, res) {
+  res.render('header');
+});
+app.get('/index', function (req, res) {
+  res.render('index');
+});
+app.get('/new', function (req, res) {
+  res.render('new');
+});
+app.listen(8080, () => {
+  console.log('Example app listening on port 8080!');
+});

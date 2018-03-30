@@ -1,0 +1,39 @@
+doctype html
+html
+    include header.pug
+    body
+        include nav.pug
+        .container
+            .row
+                .col-12
+                    h2 New game
+                    form.formNewGame(action='/players', method='POST', novalidate='')
+                        .form-group.row
+                            label.col-sm-2.col-form-label(for='inputGameName') Game name
+                            .col-sm-10
+                                input#inputGameName.form-control(type='text', name='inputGameName', placeholder='Game name', required='')
+                                .valid-feedback Looks good!
+                                .invalid-feedback Please choose a name for the game.
+                        .form-group.row
+                            label.col-sm-2.col-form-label(for='inputNumberPlayer') Number of players
+                            .col-sm-10
+                                input#inputNumberPlayer.form-control(type='number', min='1', max='10', name='inputNumberPlayer', placeholder='Number of players (max 10)', required='')
+                                .valid-feedback Looks good!
+                                .invalid-feedback Please choose a number of players.
+                        fieldset.form-group
+                            .row
+                                legend.col-form-label.pt-0.col-sm-12 Does the highest or the lowest score win the round?
+                            .row
+                                .col-sm-10
+                                    .form-check
+                                        input#gridRadios1.form-check-input(type='radio', name='winRule', value='high', required='')
+                                        label.form-check-label(for='gridRadios1') Highest score wins round
+                                    .form-check
+                                        input#gridRadios2.form-check-input(type='radio', name='winRule', value='low')
+                                        label.form-check-label(for='gridRadios2') Lowest score wins round
+                                        .valid-feedback Looks good!
+                                        .invalid-feedback Please choose a setting.
+                        .form-group.row
+                            .col-sm-10
+                                button.btn.btn-primary(type='submit') Next
+        include footer.pug
