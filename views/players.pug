@@ -4,5 +4,18 @@ html
     body
         include nav.pug
         .container
-            .row Test
+            .row
+                .col12
+                    h2 Player names
+                    form.formPlayerNames.needs-validation(action='/initiateGame', method='POST', novalidate)
+                        - var n = 0;
+                        while n < numberPlayers
+                            .form-group.row
+                                .col-sm-10
+                                    input.playerNames.form-control(type='text', name='inputPlayerName' + n++, placeholder='Player ' + n, required)
+                                    .valid-feedback Looks good!
+                                    .invalid-feedback Please choose a name.        
+                        button.btn.btn-primary(type='submit') Next
+        script
+            include ../scripts/validation.js                
         include footer.pug

@@ -1,0 +1,18 @@
+doctype html
+html
+    include header.pug
+    body
+        include nav.pug
+        .container
+            .row
+                .col12
+                    h2 
+                    table.table.table-striped
+                        thead
+                            tr
+                                th(scope='col') Noms
+                                each val in playerName
+                                    th(scope='col') #{val}
+        script
+            include ../scripts/validation.js                
+        include footer.pug
