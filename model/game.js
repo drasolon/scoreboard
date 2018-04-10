@@ -15,7 +15,6 @@ let Game = (function () {
     };
 
     g.setPlayers = function(newPlayers) {
-        // to do : keep only values of obj
         players = newPlayers;
     };
 
@@ -25,6 +24,14 @@ let Game = (function () {
 
     g.readName = () => {
         return name;
+    }
+
+    g.readPlayers = () => {
+        return players;
+    }
+
+    g.readRule = () => {
+        return rule;
     }
 
     return g;

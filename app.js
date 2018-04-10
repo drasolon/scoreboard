@@ -13,8 +13,8 @@ app.post('/players', (req, res) => {
   res.render('players', {numberPlayers: req.body.inputNumberPlayers})
 });
 app.post('/initiateGame', (req, res) => {
-  game.setPlayers(req.body.inputPlayerName);
-  res.render('initiateGame', {playerName: req.body});
+  game.setPlayers(req.body);
+  res.render('initiateGame', {playerName: game.readPlayers});
 });
 app.get('/addRound', function (req, res) {
   res.render('addRound');
