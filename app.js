@@ -10,14 +10,16 @@ app.use(express.urlencoded());
 app.post('/players', (req, res) => {
   game.setName(req.body.inputGameName);
   game.setRule(req.body.winRule);
-  res.render('players', {numberPlayers: req.body.inputNumberPlayers})
+  res.render('players', { numberPlayers: req.body.inputNumberPlayers })
 });
 app.post('/initiateGame', (req, res) => {
-  game.setPlayers(req.body);
-  res.render('initiateGame', {playerName: game.readPlayers});
+  if (req.body.playerName != null) {
+    game.setPlayers(req.body.playerName);
+  }
+  res.render('initiateGame', { playerName: game.readPlayers(), gameName: game.readName() });
 });
 app.get('/addRound', function (req, res) {
-  res.render('addRound');
+  res.render('addRound', { playerName: game.readPlayers(), gameName: game.readName() });
 });
 app.get('/header', function (req, res) {
   res.render('header');

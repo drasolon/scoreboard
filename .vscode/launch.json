@@ -9,14 +9,22 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/app.js"
+            "program": "${workspaceFolder}/app.js",
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**/*.js",
+                "<node_internals>/**/*.js"
+              ]
         },
         {
             "type": "chrome",
             "request": "launch",
             "name": "Lancer Chrome sur localhost",
             "url": "http://localhost:8080/index.html",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}",
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**/*.js",
+                "<node_internals>/**/*.js"
+              ]
         }
     ]
 }

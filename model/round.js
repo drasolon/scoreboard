@@ -1,21 +1,11 @@
-let Game = (function () {
+/* let Round = (function () {
     let name;
-    let players = [];
-    let rounds = [];
-    let rule;
+    let scores = [];
 
     var self = {};
-    
-    self.setRule = function(newRule) {
-        rule = newRule;
-    };
 
     self.setName = function(newName) {
         name = newName;
-    };
-
-    self.setPlayers = function(newPlayers) {
-        players = newPlayers;
     };
 
     self.newRound = function(newRound) {
@@ -30,11 +20,7 @@ let Game = (function () {
         return players;
     }
 
-    self.readRule = () => {
-        return rule;
-    }
-
     return self;
 })();
 
-module.exports = Game;
+module.exports = Round; */

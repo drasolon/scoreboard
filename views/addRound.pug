@@ -5,17 +5,20 @@ html
         include nav.pug
         .container
             .row
-                .col12
-                    |Add new Score
+                .col-12
+                    h1 Add new Score
             .row
-                .col12
-                    h2 
-                    table.table.table-striped
-                        thead
-                            tr
-                                th(scope='col') Noms
-                                each val in playerName
-                                    th(scope='col') #{val}
+                .col-12
+                    h2 #{gameName}
+            .row
+                form.formScore.needs-validation(action='/initiateGame', method='POST', novalidate)
+                    each val in playerName
+                        .col-12 #{val}
+                            .form-group.row
+                                input.playerScore.form-control(type='number', name='playerScore', placeholder='Score', required)
+                                .valid-feedback Looks good!
+                                .invalid-feedback Please enter a score.        
+                    button.btn.btn-primary(type='submit') Save    
         script
             include ../scripts/validation.js                
         include footer.pug
