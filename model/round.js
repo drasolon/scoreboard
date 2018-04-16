@@ -1,26 +1,27 @@
-/* let Round = (function () {
+let Round = (function () {
     let name;
     let scores = [];
 
-    var self = {};
+    let self = {};
 
-    self.setName = function(newName) {
+    self.setName = function (newName) {
         name = newName;
     };
 
-    self.newRound = function(newRound) {
-        rounds.push(newRound);
+    self.setScores = function (newScores) {       
+        scores = newScores;
     };
 
-    self.readName = () => {
+    self.getName = () => {
         return name;
     }
 
-    self.readPlayers = () => {
-        return players;
+    self.getScores = () => {
+        return scores;
     }
+
 
     return self;
 })();
 
-module.exports = Round; */
+module.exports = Round;

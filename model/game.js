@@ -1,38 +1,37 @@
 let Game = (function () {
     let name;
-    let players = [];
-    let rounds = [];
     let rule;
+    let rounds = [];
 
     var self = {};
-    
-    self.setRule = function(newRule) {
+
+    self.setRule = function (newRule) {
         rule = newRule;
     };
 
-    self.setName = function(newName) {
+    self.setName = function (newName) {
         name = newName;
     };
 
-    self.setPlayers = function(newPlayers) {
-        players = newPlayers;
-    };
+    self.setRound = (newName, newScores) => {
+        let tempObj = {};
+        tempObj.name = newName;
+        tempObj.scores = newScores;
+        rounds.push(tempObj);
+    }
 
-    self.newRound = function(newRound) {
-        rounds.push(newRound);
-    };
-
-    self.readName = () => {
+    self.getName = () => {
         return name;
     }
 
-    self.readPlayers = () => {
-        return players;
-    }
-
-    self.readRule = () => {
+    self.getRule = () => {
         return rule;
     }
+
+    self.getRounds = () => {
+        return rounds;
+    }
+
 
     return self;
 })();

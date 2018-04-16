@@ -12,10 +12,13 @@ html
                     h2 #{gameName}
             .row
                 form.formScore.needs-validation(action='/initiateGame', method='POST', novalidate)
-                    each val in playerName
+                    .col-12 Round Name
+                        .form-group.row
+                            input.roundName.form-control(type='text', name= 'roundName', placeholder='Round Name (optional)')
+                    each val in playerNames
                         .col-12 #{val}
                             .form-group.row
-                                input.playerScore.form-control(type='number', name='playerScore', placeholder='Score', required)
+                                input.playerScore.form-control(type='number', name= 'playerScore', placeholder='Score', required)
                                 .valid-feedback Looks good!
                                 .invalid-feedback Please enter a score.        
                     button.btn.btn-primary(type='submit') Save    

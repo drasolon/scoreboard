@@ -13,10 +13,15 @@ html
                         thead
                             tr
                                 th(scope='col') Noms
-                                each val in playerName
+                                each val in playerNames
                                     th(scope='col') #{val}
                         tbody
-                            tr
+                        if (rounds)
+                            each round in rounds
+                                tr
+                                    th(scope='row') #{round.name}
+                                    each score in round.scores
+                                        td #{score}
                             
         script
             include ../scripts/validation.js                
