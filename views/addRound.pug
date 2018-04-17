@@ -11,10 +11,10 @@ html
                 .col-12
                     h2 #{gameName}
             .row
-                form.formScore.needs-validation(action='/initiateGame', method='POST', novalidate)
+                form.formScore.needs-validation(action='/newRound', method='POST', novalidate)
                     .col-12 Round Name
                         .form-group.row
-                            input.roundName.form-control(type='text', name= 'roundName', placeholder='Round Name (optional)')
+                            input.roundName.form-control(type='text', name= 'roundName', value= defaultRoundName, placeholder='Round Name (optional)')
                     each val in playerNames
                         .col-12 #{val}
                             .form-group.row

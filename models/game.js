@@ -1,7 +1,9 @@
 let Game = (function () {
+
     let name;
     let rule;
     let rounds = [];
+    let players = [];
 
     var self = {};
 
@@ -13,10 +15,10 @@ let Game = (function () {
         name = newName;
     };
 
-    self.setRound = (newName, newScores) => {
+    self.setRound = (round) => {
         let tempObj = {};
-        tempObj.name = newName;
-        tempObj.scores = newScores;
+        tempObj.name = round.getName();
+        tempObj.scores = round.getScores();
         rounds.push(tempObj);
     }
 
@@ -30,6 +32,13 @@ let Game = (function () {
 
     self.getRounds = () => {
         return rounds;
+    }
+
+    self.reset = () => {
+        name = '';
+        rule = '';
+        rounds = [];
+        players = [];
     }
 
 

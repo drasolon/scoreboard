@@ -7,7 +7,7 @@ html
             .row
                 .col-12
                     h2 Player names
-                    form.formPlayerNames.needs-validation(action='/initiateGame', method='POST', novalidate)
+                    form.formPlayerNames.needs-validation(action='/rounds', method='POST', novalidate)
                         - var n = 0;
                         while n < numberPlayers
                             .form-group.row
