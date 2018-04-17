@@ -6,8 +6,7 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.createPlayer = [
 
     // Validate fields.
-    body('playerName').isLength({ min: 1 }).trim().withMessage('Player name must be specified.')
-        .isAlphanumeric().withMessage('Player name has non-alphanumeric characters.'),
+    body('playerName').isLength({ min: 1 }).trim().withMessage('Player name must be specified.'),
 
     // Sanitize fields.
     sanitizeBody('playerName').trim().escape(),

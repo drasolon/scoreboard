@@ -7,8 +7,7 @@ exports.createGame = [
 
     // Validate fields.
 
-    body('inputGameName').isLength({ min: 1 }).trim().withMessage('Game name must be specified.')
-        .isAlphanumeric().withMessage('Game name has non-alphanumeric characters.'),
+    body('inputGameName').isLength({ min: 1 }).trim().withMessage('Game name must be specified.'),
 
     body('inputNumberPlayers').isLength({ min: 1 }).trim().withMessage('Number of players must be specified.')
         .isInt().withMessage('This must be a number.'),

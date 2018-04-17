@@ -5,10 +5,8 @@ html
         include nav.pug
         .container
             .row
-                a(role='button' class='btn btn-primary btn-lg' href="addRound") Add Round
-            .row
                 .col-12
-                    h2 #{gameName}
+                    h2.text-center #{gameName}
                     table.table.table-striped
                         thead
                             tr
@@ -22,7 +20,9 @@ html
                                     th(scope='row') #{round.name}
                                     each score in round.scores
                                         td #{score}
-                            
+            .row.justify-content-center
+                .col-4
+                    a(role='button' class='btn btn-primary btn-sm' href="addRound") Add Round           
         script
             include ../scripts/validation.js                
         include footer.pug
