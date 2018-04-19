@@ -28,5 +28,5 @@ app.set('views', path.join(__dirname, 'views'))
     res.render('new')
   })
   .listen(8080, () => {
-    console.log('Example app listening on port 8080!');
+    console.log('Server is running');
   });

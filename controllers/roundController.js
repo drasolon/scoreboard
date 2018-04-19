@@ -8,10 +8,13 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.newRound = [
 
     // Validate fields.
-    body('roundName').isLength({ min: 1 }).trim().withMessage('Round name must be specified.'),
+    body('roundName').exists()
+        .isLength({ min: 1 }).trim().withMessage('Round name must be specified.')
+        .matches("^[a-zA-Z0-9 ]+$").withMessage('Round name must only contains alphanumeric characters'),
 
-    body('playerScore').isLength({ min: 1 }).trim().withMessage('Player score must be specified.')
-        .isInt().withMessage('Player score has non-numeric characters.'),
+    body('playerScore').exists()
+        .isLength({ min: 1 }).trim().withMessage('Player score must be specified.')
+        .isInt().withMessage('Player score must only contains numeric characters.'),
 
     // Sanitize fields.
     sanitizeBody('roundName').trim().escape(),
@@ -20,12 +23,15 @@ exports.newRound = [
     (req, res, next) => {
 
         const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
-            return `${location}[${param}]: ${msg}`;
+            return msg;
         };
 
         const result = validationResult(req).formatWith(errorFormatter);
+        // errors handling
         if (!result.isEmpty()) {
-            return res.json({ errors: result.array() });
+
+            // reload same page with error message
+            res.render('addRound', { errors: result.array() })
         }
 
         Round.setScores(req.body.playerScore);

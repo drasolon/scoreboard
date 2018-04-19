@@ -4,6 +4,12 @@ html
     body
         include nav.pug
         .container
+            if (errors)
+                .row
+                    .col-12
+                        ul
+                        each error in errors                       
+                            li #{error}
             .row
                 .col-12
                     h2.text-center #{gameName}

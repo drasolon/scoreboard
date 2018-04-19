@@ -6,7 +6,9 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.createPlayer = [
 
     // Validate fields.
-    body('playerName').isLength({ min: 1 }).trim().withMessage('Player name must be specified.'),
+    body('playerName').exists().withMessage('false')
+        .isLength({ min: 1 }).trim().withMessage('Player name must be specified.')
+        .matches("^[a-zA-Z0-9 ]+$").withMessage('Player name must be in alphanumeric characters'),
 
     // Sanitize fields.
     sanitizeBody('playerName').trim().escape(),
@@ -14,12 +16,16 @@ exports.createPlayer = [
     (req, res, next) => {
 
         const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
-            return `${location}[${param}]: ${msg}`;
+            return msg;
         };
 
         const result = validationResult(req).formatWith(errorFormatter);
+
+        // errors handling
         if (!result.isEmpty()) {
-            return res.json({ errors: result.array() });
+
+            // reload same page with error message
+            res.render('players', { errors: result.array() })
         }
 
         Player.setPlayers(req.body.playerName);
