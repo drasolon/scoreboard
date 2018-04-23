@@ -8,11 +8,11 @@ exports.createGame = [
     // Validate fields.
 
     body('inputGameName').exists()
-        .isLength({ min: 1 }).trim().withMessage('Game name must be specified.')
+        .isLength({ min: 1 }).withMessage('Game name must be specified.')
         .matches("^[a-zA-Z0-9 ]+$").withMessage('Game name must be alphanumeric characters'),
 
     body('inputNumberPlayers').exists()
-        .isLength({ min: 1 }).trim().withMessage('Number of players must be specified.')
+        .isLength({ min: 1 }).withMessage('Number of players must be specified.')
         .isInt().withMessage('Number of players must be a number.'),
 
     body('winRule').exists()

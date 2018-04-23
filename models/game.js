@@ -3,8 +3,7 @@ let Game = (function () {
     let name;
     let rule;
     let rounds = [];
-    let players = [];
-
+    let totals = [];
     var self = {};
 
     self.setRule = function (newRule) {
@@ -20,6 +19,15 @@ let Game = (function () {
         tempObj.name = round.getName();
         tempObj.scores = round.getScores();
         rounds.push(tempObj);
+
+       if (rounds.length < 2) {
+           totals = tempObj.scores;
+       }
+       else {
+           totals = tempObj.scores.map((score, index) => {
+               return score + totals[index]
+           })
+       }
     }
 
     self.getName = () => {
@@ -34,11 +42,16 @@ let Game = (function () {
         return rounds;
     }
 
+    self.getTotals = () => {
+        return totals;
+    }
+
     self.reset = () => {
         name = '';
         rule = '';
         rounds = [];
         players = [];
+        totals = [];
     }
 
 

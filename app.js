@@ -27,6 +27,9 @@ app.set('views', path.join(__dirname, 'views'))
     Game.reset();
     res.render('new')
   })
+  .use(function(req, res, next) {
+    res.status(404).send('404 - Sorry cant find that!');
+  })
   .listen(8080, () => {
     console.log('Server is running');
   });

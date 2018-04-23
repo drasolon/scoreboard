@@ -20,12 +20,19 @@ html
                                 each val in playerNames
                                     th(scope='col') #{val}
                         tbody
-                        if (rounds)
-                            each round in rounds
+                            if (rounds)
+                                each round in rounds
+                                    tr
+                                        th(scope='row') #{round.name}
+                                            each score in round.scores
+                                                td #{score}
+                            if (totals)
                                 tr
-                                    th(scope='row') #{round.name}
-                                    each score in round.scores
-                                        td #{score}
+                                    th(scope='row') Total
+                                        each total in totals
+                                            td #{total}
+                                                   
+                                    
             .row.justify-content-center
                 .col-4
                     a(role='button' class='btn btn-primary btn-sm' href="addRound") Add Round           
