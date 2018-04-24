@@ -31,6 +31,11 @@ html
                                     th(scope='row') Total
                                         each total in totals
                                             td #{total}
+                            if (ranks)
+                                tr
+                                    th(scope='row') Rank
+                                        each rank in ranks
+                                            td #{rank}                
                                                    
                                     
             .row.justify-content-center
