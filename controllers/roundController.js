@@ -8,16 +8,17 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.newRound = [
 
     // Validate fields.
-    body('roundName').isLength({ min: 1 }).trim().withMessage('Round name must be specified.')
+    body('roundName').trim()
+        .isLength({ min: 1 }).withMessage('Round name must be specified.')
         .matches("^[a-zA-Z0-9 ]+$").withMessage('Round name must only contains alphanumeric characters'),
 
-    body('playerScore').exists()
-        .isLength({ min: 1 }).trim().withMessage('Player score must be specified.')
+    body('playerScores.*').trim()
+        .isLength({ min: 1 }).withMessage('Player score must be specified.')
         .isInt().withMessage('Player score must only contains numeric characters.'),
 
     // Sanitize fields.
     sanitizeBody('roundName').trim().escape(),
-    sanitizeBody('playerScore.*').trim().escape().toInt(),
+    sanitizeBody('playerScores.*').trim().escape().toInt(),
 
     (req, res, next) => {
 
@@ -33,7 +34,7 @@ exports.newRound = [
             res.render('addRound', { errors: result.array() })
         }
 
-        Round.setScores(req.body.playerScore);
+        Round.setScores(req.body.playerScores);
         Round.setName(req.body.roundName);
         Game.setRound(Round);
 

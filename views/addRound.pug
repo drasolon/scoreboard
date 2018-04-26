@@ -17,11 +17,11 @@ html
                 form.formScore.needs-validation(action='/newRound', method='POST', novalidate)
                     .col-12 Round Name
                         .form-group.row
-                            input.roundName.form-control(type='text', name= 'roundName', value= defaultRoundName, placeholder='Round Name (optional)')
+                            input.roundName.form-control(type='text', name= 'roundName', value= defaultRoundName, maxlength="20", placeholder='Round Name (optional)')
                     each val in playerNames
                         .col-12 #{val}
                             .form-group.row
-                                input.playerScore.form-control(type='number', name= 'playerScore', placeholder='Score', required)
+                                input.playerScore.form-control(type='number', name= 'playerScores', placeholder='Score', required)
                                 .valid-feedback Looks good!
                                 .invalid-feedback Please enter a score.        
                     button.btn.btn-primary(type='submit') Save    

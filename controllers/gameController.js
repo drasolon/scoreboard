@@ -7,16 +7,16 @@ exports.createGame = [
 
     // Validate fields.
 
-    body('inputGameName').exists()
+    body('inputGameName').trim()
         .isLength({ min: 1 }).withMessage('Game name must be specified.')
         .matches("^[a-zA-Z0-9 ]+$").withMessage('Game name must be alphanumeric characters'),
 
-    body('inputNumberPlayers').exists()
+    body('inputNumberPlayers').trim()
         .isLength({ min: 1 }).withMessage('Number of players must be specified.')
-        .isInt().withMessage('Number of players must be a number.'),
+        .isInt().withMessage('Number of players must be a number between 2 and 10.')
+        .isIn([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).withMessage('Number of players must be a number between 2 and 10'),
 
-    body('winRule').exists()
-        .isIn(['high', 'low']).withMessage('Choose only between the two radio buttons'),
+    body('winRule').isIn(['high', 'low']).withMessage('Choose only between the two radio buttons'),
 
     // Sanitize fields.
     sanitizeBody('inputGameName').trim().escape(),

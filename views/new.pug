@@ -12,20 +12,20 @@ html
                             li #{error}                
             .row
                 .col-12
-                    h2.text-center New game
+                    h2.text-center New game faefa
                     form.formNewGame.needs-validation(action='/players', method='POST', novalidate)
                         .form-group.row
                             label.col-sm-2.col-form-label(for='inputGameName') Game name
                             .col-sm-10
-                                input#inputGameName.form-control(type='text', name='inputGameName', placeholder='Game name', required='')
+                                input#inputGameName.form-control(type='text', name='inputGameName', placeholder='Game name', maxlength="20", required='')
                                 .valid-feedback Looks good!
                                 .invalid-feedback Please choose a name for the game.
                         .form-group.row
                             label.col-sm-2.col-form-label(for='inputNumberPlayers') Number of players
                             .col-sm-10
-                                input#inputNumberPlayers.form-control(type='number', min='1', max='10', name='inputNumberPlayers', placeholder='Number of players (max 10)', required='')
+                                input#inputNumberPlayers.form-control(type='number', min='2', max='10', name='inputNumberPlayers', placeholder='Number of players (max 10)', required='')
                                 .valid-feedback Looks good!
-                                .invalid-feedback Please choose a number of players.
+                                .invalid-feedback Please choose a number of players between 2 and 10.
                         fieldset.form-group
                             .row
                                 legend.col-form-label.pt-0.col-sm-12 Does the highest or the lowest score win the round?
