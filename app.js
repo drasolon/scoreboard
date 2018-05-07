@@ -2,30 +2,26 @@ const express = require('express');
 const pug = require('pug');
 const app = express();
 const path = require('path');
-const { body, validationResult } = require('express-validator/check');
-const { sanitizeBody } = require('express-validator/filter');
-let game = require('./routes/game');
-let players = require('./routes/players');
-let round = require('./routes/round')
-let Game = require('./models/game');
-let Players = require('./models/players');
+const game = require('./routes/game');
+const gameInstance = require('./models/gameInstance');
+const mongoose = require('mongoose');
+const mongoDB = 'mongodb://AlphaScoreboard:726rNscu4z8G@ds159459.mlab.com:59459/scoreboard-db';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.set('views', path.join(__dirname, 'views'))
   .set('view engine', 'pug')
   .use(express.json())
   .use(express.urlencoded())
-  .use('/players', game)
-  .use('/rounds', players)
-  .use('/newRound', round)
-  .get('/addRound', function (req, res) {
-    res.render('addRound', { playerNames: Players.getPlayers(), gameName: Game.getName(), defaultRoundName: 'Round ' + (Game.getRounds().length + 1) })
-  })
+  .use('/game', game)
   .get('/index', function (req, res) {
     res.render('index');
   })
   .get('/new', function (req, res) {
-    Game.reset();
-    res.render('new')
+    res.render('new');
+    gameInstance.reset();
   })
   .use(function(req, res, next) {
     res.status(404).send('404 - Sorry cant find that!');

@@ -1,11 +1,15 @@
-var express = require('express');
-var router = express.Router();
-
-var gameController = require('../controllers/gameController'); 
+const express = require('express');
+const router = express.Router();
+const gameController = require('../controllers/gameController');
 
 router.post('/', gameController.createGame);
+router.get('/:id', gameController.getGame);
+
+router.post('/rounds', gameController.createPlayer);
+router.get('/:id/addRound', gameController.getRound);
+router.post('/:id/addRound', gameController.addRound);
 router.get('/', function (req, res) {
-    res.redirect('new');
-  });
+  res.redirect('new');
+});
 
 module.exports = router;

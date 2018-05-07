@@ -10,9 +10,11 @@
   "author": "David Rasolondramanitra",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.0",
     "express": "^4.16.3",
     "express-validator": "^5.1.2",
     "mongodb": "^3.0.7",
+    "mongoose": "^5.0.16",
     "pug": "^2.0.3"
   },
   "devDependencies": {

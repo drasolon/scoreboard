@@ -1,104 +1,82 @@
-let Game = (function () {
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-    let name;
-    let rule;
-    let rounds = [];
-    let totals = [];
-    let ranks = [];
-    var self = {};
-
-    function calculateTotals(tempObj) {
-        if (rounds.length < 2) {
-            totals = tempObj.scores;
+const GameSchema = new Schema({
+    name: { type: String, required: true },
+    rule: { type: String, required: true },
+    players: [{ type: String, required: true }],
+    rounds: [
+        {
+            name: { type: String, required: true },
+            scores: [{ type: Number, required: true }]
         }
-        else {
-            totals = tempObj.scores.map((score, index) => {
-                return score + totals[index]
-            })
-        }
-    }
+    ]
 
-    function calculateRanks() {
-        let tempArray = [];
+});
+
+// Virtual for the game instance URL.
+GameSchema
+    .virtual('url')
+    .get(function () {
+        return '/game/' + this._id;
+    });
+
+// Virtual for the total score of each players.
+GameSchema
+    .virtual('totals')
+    .get(function () {
+        let totals = [];
+        for (let i = 0; i < this.rounds.length; i++) {
+            for (let j = 0; j < this.rounds[i].scores.length; j++) {
+                if (typeof totals[j] === 'undefined') {
+                    totals[j] = 0;
+                }
+                totals[j] += this.rounds[i].scores[j];
+            }
+        }
+        return totals
+    })
+
+// Virtual for the ranks of each players
+GameSchema
+    .virtual('ranks')
+    .get(function () {
+        let totals = this.totals;
+        let tempArr = [];
         let counter = 1;
+        let sortedRanks = [];
 
-        // Create tempArray
-        tempArray = totals.map((e, i) => {
-            return { index: i, value: e, rank: '' }
-        });
+        // Create array of totals and their original indexes
+        for (let k = 0; k < totals.length; k++) {
+            tempArr.push({ 'originalIndex': k, 'total': totals[k] });
+        }
 
         // Sort array by asc or desc
-        tempArray.sort((a, b) => {
-            if (rule == 'low') {
-                return a.value - b.value
-            } 
-            else { return a.value + b.value }
+        tempArr.sort((a, b) => {
+            if (this.rule == 'low') {
+                return a.total - b.total
+            }
+            else { return a.total + b.total }
         })
 
-        // Asisgn rank
-        for (let i = 0; i < tempArray.length; i++) {
-            tempArray[i].rank = counter;
+        // Asisgn ranks to each total    
+        for (let l = 0; l < tempArr.length; l++) {
+            tempArr[l].rank = counter;
             counter++
         }
 
-        // Sort by index
-        tempArray.sort((a, b) => {
-            return a.index - b.index
+        // Sort array by original indexes
+        tempArr.sort((a, b) => {
+            return a.rank - b.rank
         })
 
-        // Keep the sorted ranks in a new array
-        ranks = tempArray.map((e) => {
-            return e.rank
-        })
-    }
+        // Only keep the ranks property
+        for (let m = 0; m < tempArr.length; m++) {
+            sortedRanks.push(tempArr[m].rank)
+        }
 
-    self.setRule = function (newRule) {
-        rule = newRule;
-    };
+        return sortedRanks;
+    })
 
-    self.setName = function (newName) {
-        name = newName;
-    };
-
-    self.setRound = (round) => {
-        let tempObj = {};
-        tempObj.name = round.getName();
-        tempObj.scores = round.getScores();
-        rounds.push(tempObj);
-        calculateTotals(tempObj);
-        calculateRanks()
-    }
-
-    self.getName = () => {
-        return name;
-    }
-
-    self.getRule = () => {
-        return rule;
-    }
-
-    self.getRounds = () => {
-        return rounds;
-    }
-
-    self.getTotals = () => {
-        return totals;
-    }
-
-    self.getRanks = () => {
-        return ranks;
-    }
-
-    self.reset = () => {
-        name = '';
-        rule = '';
-        rounds = [];
-        players = [];
-        totals = [];
-    }
-
-
-    return self;
-})();
-
-module.exports = Game;
+// Export model.
+module.exports = mongoose.model('Game', GameSchema);

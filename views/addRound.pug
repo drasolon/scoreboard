@@ -14,10 +14,10 @@ html
                 .col-12
                     h2.text-center Add new Score
             .row
-                form.formScore.needs-validation(action='/newRound', method='POST', novalidate)
+                form.formScore.needs-validation(action= url + '/addRound', method='POST', novalidate)
                     .col-12 Round Name
                         .form-group.row
-                            input.roundName.form-control(type='text', name= 'roundName', value= defaultRoundName, maxlength="20", placeholder='Round Name (optional)')
+                            input.roundName.form-control(type='text', name= 'roundName', value= roundCounter, maxlength="20", placeholder='Round Name (optional)')
                     each val in playerNames
                         .col-12 #{val}
                             .form-group.row
