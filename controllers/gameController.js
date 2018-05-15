@@ -2,6 +2,7 @@ const Game = require('../models/game');
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 const gameInstance = require('../models/gameInstance');
+const mongoose = require('mongoose');
 
 exports.createGame = [
 
@@ -26,25 +27,20 @@ exports.createGame = [
 
         const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
             return msg;
-
-        };
-
+        }
         const result = validationResult(req).formatWith(errorFormatter);
         // errors handling
         if (!result.isEmpty()) {
 
-            // reload same page with error message
+            // if errors, reload same page with error message
             console.log(result.array())
             res.render('new', { errors: result.array() })
-
         }
-
         else {
             gameInstance.name = req.body.inputGameName;
             gameInstance.rule = req.body.winRule;
-            res.render('game', { numberPlayers: req.body.inputNumberPlayers });
+            res.render('players', { numberPlayers: req.body.inputNumberPlayers });
         }
-
     }]
 
 exports.createPlayer = [
@@ -70,8 +66,6 @@ exports.createPlayer = [
 
         }).withMessage('Player name must be unique'),
 
-
-
     // Sanitize fields.
     sanitizeBody('playerNames.*').trim().escape(),
 
@@ -85,8 +79,8 @@ exports.createPlayer = [
 
         // errors handling
         if (!result.isEmpty()) {
-            // reload same page with error message
-            res.render('game', { errors: result.array(), numberPlayers: req.body.inputNumberPlayers, playerNames: req.body.playerNames })
+            // if errors, reload same page with error message
+            res.render('players', { errors: result.array(), numberPlayers: req.body.inputNumberPlayers, playerNames: req.body.playerNames })
         }
         else {
             let game = new Game(
@@ -127,9 +121,9 @@ exports.addRound = [
         // errors handling
         if (!result.isEmpty()) {
 
-            // reload same page with error message
+            // if errors, reload same page with error message
             Game.findById(req.params.id, function (err, retrievedGame) {
-                if (err) { throw err; }
+                if (err) { return next(err); }
                 res.render('addRound', { errors: result.array(), playerNames: retrievedGame.players, roundCounter: 'Round ' + (retrievedGame.rounds.length + 1), url: retrievedGame.url })
             })
         }
@@ -139,28 +133,49 @@ exports.addRound = [
                 scores: req.body.playerScores
             };
             Game.findByIdAndUpdate(req.params.id, { $push: { rounds: round } }, function (err, retrievedGame) {
-                if (err) { throw err; }
+                if (err) { return next(err); }
 
                 res.redirect(retrievedGame.url)
             })
-
         }
-
-
     }]
 
-exports.getGame = function (req, res) {
-    Game.findById(req.params.id, function (err, retrievedGame) {
-        if (err) { throw err; }
-        res.render('rounds', { playerNames: retrievedGame.players, rounds: retrievedGame.rounds, gameName: retrievedGame.name, totals: retrievedGame.totals, ranks: retrievedGame.ranks, url: retrievedGame.url })
-    })
+exports.getGame = function (req, res, next) {
+    if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+        Game.findById(req.params.id, (err, retrievedGame) => {
+            if (err) { return next(err); }
+            if (retrievedGame == null) {
+                err = new Error;
+                err.status = 404;
+                return next(err);
+            }
+            res.render('game', { playerNames: retrievedGame.players, rounds: retrievedGame.rounds, gameName: retrievedGame.name, totals: retrievedGame.totals, ranks: retrievedGame.ranks, url: retrievedGame.url })
+        })
+    }
+    else {
+        err = new Error;
+        err.status = 404;
+        return next(err);
+    }
 }
 
-exports.getRound = function (req, res) {
-    Game.findById(req.params.id, function (err, retrievedGame) {
-        if (err) { throw err; }
-        res.render('addRound', { playerNames: retrievedGame.players, roundCounter: 'Round ' + (retrievedGame.rounds.length + 1), url: retrievedGame.url })
-    })
+exports.getRound = function (req, res, next) {
+    if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+        Game.findById(req.params.id, function (err, retrievedGame) {
+            if (err) { return next(err); }
+            if (retrievedGame == null) {
+                err = new Error;
+                err.status = 404;
+                return next(err);
+            }
+            res.render('addRound', { playerNames: retrievedGame.players, roundCounter: 'Round ' + (retrievedGame.rounds.length + 1), url: retrievedGame.url })
+        })
+    }
+    else {
+        err = new Error;
+        err.status = 404;
+        return next(err);
+    }
 }
 
 

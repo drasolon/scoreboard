@@ -1,0 +1,12 @@
+doctype html
+html
+    include header.pug
+    body
+        include nav.pug
+        .container
+            .row.justify-content-center
+                .col-8
+                    h1= message
+                    h2= error.status
+                    pre #{error.stack}
+        include footer.pug

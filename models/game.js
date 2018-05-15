@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const GameSchema = new Schema({
     name: { type: String, required: true },
-    rule: { type: String, required: true },
+    rule: { type: String, enum: ['high', 'low'], required: true },
     players: [{ type: String, required: true }],
     rounds: [
         {
@@ -14,14 +14,12 @@ const GameSchema = new Schema({
 
 });
 
-// Virtual for the game instance URL.
 GameSchema
     .virtual('url')
     .get(function () {
         return '/game/' + this._id;
     });
 
-// Virtual for the total score of each players.
 GameSchema
     .virtual('totals')
     .get(function () {
@@ -37,7 +35,6 @@ GameSchema
         return totals
     })
 
-// Virtual for the ranks of each players
 GameSchema
     .virtual('ranks')
     .get(function () {
@@ -45,6 +42,8 @@ GameSchema
         let tempArr = [];
         let counter = 1;
         let sortedRanks = [];
+
+        // We need to assign a rank to each total and sort the array in the same order as the player list, or the total list
 
         // Create array of totals and their original indexes
         for (let k = 0; k < totals.length; k++) {
@@ -58,23 +57,22 @@ GameSchema
             }
             else { return a.total + b.total }
         })
-
+        
         // Asisgn ranks to each total    
         for (let l = 0; l < tempArr.length; l++) {
             tempArr[l].rank = counter;
             counter++
         }
-
+        
         // Sort array by original indexes
         tempArr.sort((a, b) => {
-            return a.rank - b.rank
-        })
+            return a.originalIndex - b.originalIndex
+        })      
 
         // Only keep the ranks property
         for (let m = 0; m < tempArr.length; m++) {
             sortedRanks.push(tempArr[m].rank)
         }
-
         return sortedRanks;
     })
 

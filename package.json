@@ -4,7 +4,7 @@
   "description": "This is an app to keep scores",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jasmine",
     "dev": "nodemon app.js"
   },
   "author": "David Rasolondramanitra",
@@ -15,9 +15,12 @@
     "express-validator": "^5.1.2",
     "mongodb": "^3.0.7",
     "mongoose": "^5.0.16",
-    "pug": "^2.0.3"
+    "npm": "^6.0.1",
+    "pug": "^2.0.3",
+    "request": "^2.85.0"
   },
   "devDependencies": {
+    "jasmine": "^3.1.0",
     "nodemon": "^1.17.3"
   }
 }

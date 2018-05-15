@@ -4,12 +4,7 @@ const app = express();
 const path = require('path');
 const game = require('./routes/game');
 const gameInstance = require('./models/gameInstance');
-const mongoose = require('mongoose');
-const mongoDB = 'mongodb://AlphaScoreboard:726rNscu4z8G@ds159459.mlab.com:59459/scoreboard-db';
-mongoose.connect(mongoDB);
-mongoose.Promise = global.Promise;
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+const db = require('./models/db')
 
 app.set('views', path.join(__dirname, 'views'))
   .set('view engine', 'pug')
@@ -23,9 +18,24 @@ app.set('views', path.join(__dirname, 'views'))
     res.render('new');
     gameInstance.reset();
   })
-  .use(function(req, res, next) {
-    res.status(404).send('404 - Sorry cant find that!');
+  
+  // Catch 404 and forward to error handler
+  .use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
   })
-  .listen(8080, () => {
+  // Error handler
+  .use(function (err, req, res, next) {
+    // Set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // Render the error page
+    res.status(err.status || 500);
+    res.render('error');
+  })
+  const server = app.listen(8080, () => {
     console.log('Server is running');
   });
+
+  module.exports = server;

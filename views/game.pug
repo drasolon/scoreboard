@@ -4,35 +4,43 @@ html
     body
         include nav.pug
         .container
+            if (errors)
+                .row
+                    .col-12
+                        ul
+                        each error in errors                       
+                            li #{error}
             .row
                 .col-12
-                    h2.text-center Player names
-                    form.formPlayerNames.needs-validation(action='/game/rounds', method='POST', novalidate)
-                        - var n = 0
-                        - var e = 0
-                        while n < numberPlayers
-                            .form-group.row
-                                .col-sm-10
-                                    if (errors)
-                                        if (e < errors.length)
-                                            if (errors[e].value == playerNames[n])
-                                                input.playerNames.is-invalid.form-control(type='text', name='playerNames', maxlength="20", value=playerNames[n], required)
-                                                .invalid-feedback #{errors[e].message}
-                                                - e++
-                                                - n++
-                                            else
-                                                input.playerNames.is-valid.form-control(type='text', name='playerNames', maxlength="20", value=playerNames[n], required)
-                                                - n++
-                                        else
-                                            input.playerNames.is-valid.form-control(type='text', name='playerNames', maxlength="20", value=playerNames[n], required)
-                                            - n++
-                                        .valid-feedback Looks good!                                       
-                                    else
-                                        input.playerNames.form-control(type='text', name='playerNames', maxlength="20", placeholder='Player ' + n++, required)
-                                        .valid-feedback Looks good!
-                                        .invalid-feedback Please choose a name.
-                        input(type="hidden", name='inputNumberPlayers', value=numberPlayers)        
-                        button.btn.btn-primary(type='submit') Next
+                    h2.text-center #{gameName}
+                    table.table.table-striped
+                        thead
+                            tr
+                                th(scope='col') Noms
+                                each val in playerNames
+                                    th(scope='col') #{val}
+                        tbody
+                            if (rounds)
+                                each round in rounds
+                                    tr
+                                        th(scope='row') #{round.name}
+                                            each score in round.scores
+                                                td #{score}
+                            if (totals)
+                                tr
+                                    th(scope='row') Total
+                                        each total in totals
+                                            td #{total}
+                            if (ranks)
+                                tr
+                                    th(scope='row') Rank
+                                        each rank in ranks
+                                            td #{rank}                
+                                                   
+                                    
+            .row.justify-content-center
+                .col-4
+                    a(role='button' class='btn btn-primary btn-sm' href= url + "/addRound") Add Round           
         script
-            include ../scripts/validation.js                        
+            include ../scripts/validation.js                
         include footer.pug
