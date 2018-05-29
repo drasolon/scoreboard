@@ -1,12 +1,21 @@
 let mockdata = [
-    {   
-        _id: '5af9cd07a569fb1e209153c9',
+    {
         name: 'test',
         rule: 'high',
-        players: ['playerTest1', 'playerTest2', 'playerTest3']
+        players: ['playerTest1', 'playerTest2', 'playerTest3'],
+        rounds: [
+            {
+                name: 'RoundTest1',
+                scores: [100, 200, 300]
+            },
+            {
+                name: 'RoundTest2',
+                scores: [780, 96, 0]
+            }
+        ]
     },
     {
-gnan:'rerse'
+        gnan: 'rerse'
     }
 ];
 module.exports = mockdata;

@@ -8,6 +8,7 @@ const db = require('./models/db')
 
 app.set('views', path.join(__dirname, 'views'))
   .set('view engine', 'pug')
+  .use(express.static(__dirname + '/public'))
   .use(express.json())
   .use(express.urlencoded())
   .use('/game', game)
@@ -18,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'))
     res.render('new');
     gameInstance.reset();
   })
-  
+
   // Catch 404 and forward to error handler
   .use(function (req, res, next) {
     var err = new Error('Not Found');
@@ -34,8 +35,8 @@ app.set('views', path.join(__dirname, 'views'))
     res.status(err.status || 500);
     res.render('error');
   })
-  const server = app.listen(8080, () => {
-    console.log('Server is running');
-  });
+const server = app.listen(8080, () => {
+  console.log('Server is running');
+});
 
-  module.exports = server;
+module.exports = server;

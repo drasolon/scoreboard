@@ -178,5 +178,24 @@ exports.getRound = function (req, res, next) {
     }
 }
 
+exports.deleteRound = function (req, res, next) {
+    if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+        Game.findByIdAndUpdate(req.params.id, { $pull: { rounds: { _id: req.params.round } } }, function (err, retrievedGame) {
+            if (err) { return next(err); }
+            if (retrievedGame == null) {
+                err = new Error;
+                err.status = 404;
+                return next(err);
+            }
+            res.redirect(retrievedGame.url)
+        })
+    }
+    else {
+        err = new Error;
+        err.status = 404;
+        return next(err);
+    }
+}
+
 
 

@@ -1,38 +1,37 @@
-doctype html
-html
-    include header.pug
-    body
-        include nav.pug
-        .container
-            .row
-                .col-12
-                    h2.text-center Player names
-                    form.formPlayerNames.needs-validation(action='/game', method='POST', novalidate)
-                        - var n = 0
-                        - var e = 0
-                        while n < numberPlayers
-                            .form-group.row
-                                .col-sm-10
-                                    if (errors)
-                                        if (e < errors.length)
-                                            if (errors[e].value == playerNames[n])
-                                                input.playerNames.is-invalid.form-control(type='text', name='playerNames', maxlength="20", value=playerNames[n], required)
-                                                .invalid-feedback #{errors[e].message}
-                                                - e++
-                                                - n++
-                                            else
-                                                input.playerNames.is-valid.form-control(type='text', name='playerNames', maxlength="20", value=playerNames[n], required)
-                                                - n++
-                                        else
-                                            input.playerNames.is-valid.form-control(type='text', name='playerNames', maxlength="20", value=playerNames[n], required)
-                                            - n++
-                                        .valid-feedback Looks good!                                       
+extends index.pug
+block content
+    .row
+        .col.mt-4
+            h4 Player names
+    .row
+        .col.mt-1
+            form.formPlayerNames.needs-validation(action='/game', method='POST', novalidate)
+                - var n = 0
+                - var e = 0
+                while n < numberPlayers
+                    .form-group.row
+                        .col
+                            if (errors)
+                                if (e < errors.length)
+                                    if (errors[e].value == playerNames[n])
+                                        input.playerNames.is-invalid.form-control(type='text', name='playerNames', maxlength="20", value=playerNames[n], required)
+                                        .invalid-feedback #{errors[e].message}
+                                        - e++
+                                        - n++
                                     else
-                                        input.playerNames.form-control(type='text', name='playerNames', maxlength="20", placeholder='Player ' + n++, required)
-                                        .valid-feedback Looks good!
-                                        .invalid-feedback Please choose a name.
-                        input(type="hidden", name='inputNumberPlayers', value=numberPlayers)        
-                        button.btn.btn-primary(type='submit') Next
-        script
-            include ../scripts/validation.js                        
-        include footer.pug
+                                        input.playerNames.is-valid.form-control(type='text', name='playerNames', maxlength="20", value=playerNames[n], required)
+                                        - n++
+                                else
+                                    input.playerNames.is-valid.form-control(type='text', name='playerNames', maxlength="20", value=playerNames[n], required)
+                                    - n++
+                                .valid-feedback Looks good!                                       
+                            else
+                                input.playerNames.form-control(type='text', name='playerNames', maxlength="20", placeholder='Player ' + (n + 1), required)
+                                - n++
+                                .valid-feedback Looks good!
+                                .invalid-feedback Please choose a name.
+                input(type="hidden", name='inputNumberPlayers', value=numberPlayers)        
+                button.mt-2.btn(type='submit') Next
+
+append scripts
+    script(src='/scripts/validation.js')

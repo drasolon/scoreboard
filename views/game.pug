@@ -1,46 +1,48 @@
-doctype html
-html
-    include header.pug
-    body
-        include nav.pug
-        .container
-            if (errors)
-                .row
-                    .col-12
-                        ul
-                        each error in errors                       
-                            li #{error}
-            .row
-                .col-12
-                    h2.text-center #{gameName}
-                    table.table.table-striped
-                        thead
+extends index.pug
+block content
+    if (errors)
+        .row
+            .col
+                ul
+                each error in errors                       
+                    li #{error}
+    .row
+        .col.mt-5.ml-2
+            h2 #{gameName}
+    hr
+    .row
+        .col.mt-2
+            table.table.table-borderless
+                thead
+                    tr
+                        th(scope='col') Noms
+                        each val in playerNames
+                            th(scope='col') #{val}
+                        td
+                tbody
+                    if (rounds)
+                        each round in rounds
                             tr
-                                th(scope='col') Noms
-                                each val in playerNames
-                                    th(scope='col') #{val}
-                        tbody
-                            if (rounds)
-                                each round in rounds
-                                    tr
-                                        th(scope='row') #{round.name}
-                                            each score in round.scores
-                                                td #{score}
-                            if (totals)
-                                tr
-                                    th(scope='row') Total
-                                        each total in totals
-                                            td #{total}
-                            if (ranks)
-                                tr
-                                    th(scope='row') Rank
-                                        each rank in ranks
-                                            td #{rank}                
-                                                   
-                                    
-            .row.justify-content-center
-                .col-4
-                    a(role='button' class='btn btn-primary btn-sm' href= url + "/addRound") Add Round           
-        script
-            include ../scripts/validation.js                
-        include footer.pug
+                                th(scope='row') #{round.name}
+                                    each score in round.scores
+                                        td #{score}
+                                    td.text-right 
+                                        a(role= 'button' href= url + '/delete/' + round._id ) x
+                    if (totals)
+                        tr.table-lighter-color
+                            th(scope='row') Total
+                                each total in totals
+                                    td #{total}
+                                td
+                    if (ranks)
+                        tr.table-light-color
+                            th(scope='row') Rank
+                                each rank in ranks
+                                    td #{rank}   
+                                td                                                                          
+    .row.justify-content-center
+        .col-sm-4.mt-1
+            a(role='button' class='btn btn-lg btn-block' href= url + "/add") Add Round           
+
+append scripts
+    script(src='/scripts/validation.js')

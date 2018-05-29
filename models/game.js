@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const RoundSchema = new Schema({
+    name: { type: String, required: true },
+    scores: [{ type: Number, required: true }]
+})
+
 const GameSchema = new Schema({
     name: { type: String, required: true },
     rule: { type: String, enum: ['high', 'low'], required: true },
     players: [{ type: String, required: true }],
-    rounds: [
-        {
-            name: { type: String, required: true },
-            scores: [{ type: Number, required: true }]
-        }
-    ]
+    rounds: [RoundSchema]
 
 });
 
@@ -45,7 +45,7 @@ GameSchema
 
         // We need to assign a rank to each total and sort the array in the same order as the player list, or the total list
 
-        // Create array of totals and their original indexes
+        // Create array of totals with their original indexes
         for (let k = 0; k < totals.length; k++) {
             tempArr.push({ 'originalIndex': k, 'total': totals[k] });
         }

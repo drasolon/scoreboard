@@ -1,30 +1,27 @@
-doctype html
-html
-    include header.pug
-    body
-        include nav.pug
-        .container
-            if (errors)
-                .row
-                    .col-12
-                        ul
-                        each error in errors                       
-                            li #{error}
-            .row
-                .col-12
-                    h2.text-center Add new Score
-            .row
-                form.formScore.needs-validation(action= url + '/addRound', method='POST', novalidate)
-                    .col-12 Round Name
-                        .form-group.row
-                            input.roundName.form-control(type='text', name= 'roundName', value= roundCounter, maxlength="20", placeholder='Round Name (optional)')
-                    each val in playerNames
-                        .col-12 #{val}
-                            .form-group.row
-                                input.playerScore.form-control(type='number', name= 'playerScores', placeholder='Score', required)
-                                .valid-feedback Looks good!
-                                .invalid-feedback Please enter a score.        
-                    button.btn.btn-primary(type='submit') Save    
-        script
-            include ../scripts/validation.js                
-        include footer.pug
+extends index.pug
+block content
+    if (errors)
+        .row
+            .col
+                ul
+                each error in errors                       
+                    li #{error}
+    .row
+        .col.mt-4
+            h4 Add scores
+    form.formScore.needs-validation(action= url + '/add', method='POST', novalidate)
+        .row.form-group   
+            label.col-sm-3.font-weight-bold.col-form-label(for='roundName') Round name
+            .col
+                input.roundName.form-control(type='text', name= 'roundName', value= roundCounter, maxlength="20", placeholder='Round Name (optional)') 
+        each val in playerNames
+            .row.form-group
+                label.col-sm-3.font-weight-bold.col-form-label(for= val) #{val}
+                .col
+                    input.playerScore.form-control(type='number', name= 'playerScores', placeholder='Score', required)
+                    .valid-feedback Looks good!
+                    .invalid-feedback Please enter a score.        
+        button.mt-2.btn(type='submit') Save
+
+append scripts
+    script(src='/scripts/validation.js')

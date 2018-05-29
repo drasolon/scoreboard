@@ -3,64 +3,98 @@ const Request = require('request');
 const db = require('../models/db');
 const mockData = require('./mockData');
 
-describe('/game/:id GET route', () => {
-    let game = new Game(mockData[0]);
-    let data = '';
+let game;
+let data = '';
 
-    beforeAll((done) => {
-        server = require('../app');
-        Game.remove({}, (err) => {
-            console.log('collection removed');
-            game.save((err) => {
-                if (err) { console.log(err) }
-                console.log('game saved');
-                done();
-            })
+beforeAll(() => {
+    server = require('../app');
+});
+
+beforeEach((done) => {
+    Game.remove({}, (err) => {
+        console.log('collection removed');
+        game = new Game(mockData[0]);
+        game.save((err) => {
+            if (err) { console.log(err) }
+            console.log('game saved');
+            data = '';
+            done();
         })
     })
+});
 
-    afterAll((done) => {
-        db.close();
-        console.log('db closed');
-        server.close();
-        console.log('server closed');
-        done();
-    })
+afterAll(() => {
+    db.close();
+    console.log('db closed');
+    server.close();
+    console.log('server closed');
+});
 
-    it('invalid :id should return status code 404', (done) => {
-        data = '';
+describe('GET /game/:id', () => {
+
+    it('invalid :id', (done) => {
         Request.get('http://localhost:8080/game/eipahf584f', (err, res) => {
             data = res.statusCode;
+            expect(data).toEqual(404);
             console.log('request 1 done');
-            expect(data).toBe(404);
             done();
         })
     });
-    it('valid :id should return status code 200', (done) => {
-        data = '';
-        Request.get('http://localhost:8080/game/' + mockData[0]._id, (err, res) => {
+    it('valid :id', (done) => {
+        let url = 'http://localhost:8080/game/' + game._id;
+        Request.get(url, (err, res) => {
             data = res.statusCode;
             console.log('request 2 done');
-            expect(data).toBe(200);
-            done();
-        })
-    })
-    it('valid :id/addRound should return status code 200', (done) => {
-        data = '';
-        Request.get('http://localhost:8080/game/' + mockData[0]._id + '/addRound', (err, res) => {
-            data = res.statusCode;
-            console.log('request 3 done');
-            expect(data).toBe(200);
-            done();
-        })
-    })
-    it('invalid :id/addRound should return status code 404', (done) => {
-        data = '';
-        Request.get('http://localhost:8080/game/eipahf584f/addRound', (err, res) => {
-            data = res.statusCode;
-            console.log('request 4 done');
-            expect(data).toBe(404);
+            expect(data).toEqual(200);
             done();
         })
     });
-})
+    it('valid :id/add', (done) => {
+        let url = 'http://localhost:8080/game/' + game._id + '/add';
+        Request.get(url, (err, res) => {
+            data = res.statusCode;
+            expect(data).toEqual(200);
+            console.log('request 3 done');
+            done();
+        })
+    });
+    it('invalid :id/addRound', (done) => {
+        Request.get('http://localhost:8080/game/eipahf584f/add', (err, res) => {
+            data = res.statusCode;
+            expect(data).toEqual(404);
+            console.log('request 4 done');
+            done();
+        })
+    })
+});
+
+describe('GET /game/:id/delete/round', () => {
+    it('invalid :id and valid round_id', (done) => {
+        let url = 'http://localhost:8080/game/eipahf584f/delete/' + game.rounds[0]._id;
+        Request.get(url, (err, res) => {
+            data = res.statusCode;
+            expect(data).toEqual(404);
+            console.log('request 5 done');
+            done();
+        })
+    });
+    it('invalid :id and invalid round_id', (done) => {
+        let url = 'http://localhost:8080/game/eipahf584f/delete/efezfzf';
+        Request.get(url, (err, res) => {
+            data = res.statusCode;
+            expect(data).toEqual(404);
+            console.log('request 6 done');
+            done();
+        })
+    });
+    it('valid :id and valid round_id', (done) => {
+        let url = 'http://localhost:8080/game/' + game._id + '/delete/' + game.rounds[0]._id;
+        Request.get(url, (err, res) => {
+            data = res.statusCode;
+            expect(data).toEqual(200);
+            console.log('request 7 done');
+            done();
+        })
+    })
+});
+
