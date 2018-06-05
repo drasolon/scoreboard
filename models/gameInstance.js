@@ -1,3 +1,5 @@
+'use strict';
+
 var gameInstance = module.exports = {
     name: '',
     rule: '',

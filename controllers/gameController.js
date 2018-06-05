@@ -1,3 +1,5 @@
+'use strict';
+
 const Game = require('../models/game');
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
@@ -153,7 +155,7 @@ exports.getGame = function (req, res, next) {
         })
     }
     else {
-        err = new Error;
+        let err = new Error;
         err.status = 404;
         return next(err);
     }
@@ -172,7 +174,7 @@ exports.getRound = function (req, res, next) {
         })
     }
     else {
-        err = new Error;
+        let err = new Error;
         err.status = 404;
         return next(err);
     }
@@ -191,7 +193,7 @@ exports.deleteRound = function (req, res, next) {
         })
     }
     else {
-        err = new Error;
+        let err = new Error;
         err.status = 404;
         return next(err);
     }

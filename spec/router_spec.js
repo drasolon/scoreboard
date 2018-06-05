@@ -1,8 +1,11 @@
+'use strict';
+
 const Game = require('../models/game');
 const Request = require('request');
 const db = require('../models/db');
 const mockData = require('./mockData');
 
+let server;
 let game;
 let data = '';
 

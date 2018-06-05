@@ -19,11 +19,15 @@
             "type": "chrome",
             "request": "launch",
             "name": "Lancer Chrome sur localhost",
-            "url": "http://localhost:8080/index.html",
+            "url": "http://localhost:8080/index",
             "webRoot": "${workspaceFolder}",
             "skipFiles": [
                 "${workspaceFolder}/node_modules/**/*.js",
-                "<node_internals>/**/*.js"
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/node_modules/",
+                "node_modules",
+                "node_modules/**",
+                "${workspaceFolder}/node_modules"
               ]
         }
     ]

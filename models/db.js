@@ -1,3 +1,5 @@
+'use strict';
+
 const mongoose = require('mongoose');
 const mongoDB = 'mongodb://AlphaScoreboard:726rNscu4z8G@ds159459.mlab.com:59459/scoreboard-db';
 mongoose.connect(mongoDB);
