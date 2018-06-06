@@ -31,11 +31,11 @@ exports.createGame = [
             return msg;
         }
         const result = validationResult(req).formatWith(errorFormatter);
-        // errors handling
+
+        // Errors handling
         if (!result.isEmpty()) {
 
-            // if errors, reload same page with error message
-            console.log(result.array())
+            // If errors, reload same page with error message
             res.render('new', { errors: result.array() })
         }
         else {
@@ -48,7 +48,6 @@ exports.createGame = [
 exports.createPlayer = [
 
     // Validate fields.
-
     body('playerNames.*').trim()
         .isLength({ min: 1 }).withMessage('Player name must be specified.')
         .matches("^[a-zA-Z0-9 ]+$").withMessage('Player name must be in alphanumeric characters')
@@ -79,9 +78,9 @@ exports.createPlayer = [
 
         const result = validationResult(req).formatWith(errorFormatter);
 
-        // errors handling
+        // Errors handling
         if (!result.isEmpty()) {
-            // if errors, reload same page with error message
+            // If errors, reload same page with error message
             res.render('players', { errors: result.array(), numberPlayers: req.body.inputNumberPlayers, playerNames: req.body.playerNames })
         }
         else {
@@ -120,10 +119,10 @@ exports.addRound = [
         };
 
         const result = validationResult(req).formatWith(errorFormatter);
-        // errors handling
+        // Errors handling
         if (!result.isEmpty()) {
 
-            // if errors, reload same page with error message
+            // If errors, reload same page with error message
             Game.findById(req.params.id, function (err, retrievedGame) {
                 if (err) { return next(err); }
                 res.render('addRound', { errors: result.array(), playerNames: retrievedGame.players, roundCounter: 'Round ' + (retrievedGame.rounds.length + 1), url: retrievedGame.url })
@@ -189,7 +188,7 @@ exports.deleteRound = function (req, res, next) {
                 err.status = 404;
                 return next(err);
             }
-            res.redirect(retrievedGame.url)
+            res.redirect(retrievedGame.url);
         })
     }
     else {

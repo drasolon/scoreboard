@@ -27,7 +27,8 @@ block content
                                     each score in round.scores
                                         td #{score}
                                     td.text-right 
-                                        a(role= 'button' href= url + '/delete/' + round._id ) x
+                                        form.formDeleteRound(action=url + '/' + round._id, method='POST')
+                                            button(type='submit') x
                     if (totals)
                         tr.table-lighter-color
                             th(scope='row') Total
