@@ -2,16 +2,10 @@
 
 const Game = require('../models/game');
 const request = require('request');
-const db = require('../models/db');
 const mockData = require('./mockData');
-
-let server;
+const server = require('../app');
 let game;
 let data = '';
-
-beforeAll(() => {
-    server = require('../app');
-});
 
 beforeEach((done) => {
     Game.remove({}, (err) => {
@@ -27,8 +21,6 @@ beforeEach((done) => {
 });
 
 afterAll(() => {
-    db.close();
-    console.log('db closed');
     server.close();
     console.log('server closed');
 });
@@ -71,10 +63,10 @@ describe('GET /game/:id', () => {
     })
 });
 
-describe('DELETE /game/:id/:round', () => {
+describe('POST /game/:id/:round', () => {
     it('invalid :id and valid round_id', (done) => {
         let url = 'http://localhost:8080/game/eipahf584f/' + game.rounds[0]._id;
-        request.delete(url, (err, res) => {
+        request.post(url, (err, res) => {
             data = res.statusCode;
             expect(data).toEqual(404);
             console.log('request 5 done');
@@ -83,7 +75,7 @@ describe('DELETE /game/:id/:round', () => {
     });
     it('invalid :id and invalid round_id', (done) => {
         let url = 'http://localhost:8080/game/eipahf584f/efezfzf';
-        request.delete(url, (err, res) => {
+        request.post(url, (err, res) => {
             data = res.statusCode;
             expect(data).toEqual(404);
             console.log('request 6 done');
@@ -92,7 +84,7 @@ describe('DELETE /game/:id/:round', () => {
     });
     it('valid :id and valid round_id', (done) => {
         let url = 'http://localhost:8080/game/' + game._id + '/' + game.rounds[0]._id;
-        request.delete(url, (err, res) => {
+        request.post(url, (err, res) => {
             data = res.statusCode;
             expect(data).toEqual(302);
             console.log('request 7 done');

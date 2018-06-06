@@ -4,7 +4,13 @@ const app = express();
 const path = require('path');
 const game = require('./routes/game');
 const gameInstance = require('./models/gameInstance');
-const db = require('./models/db')
+const config = require('./config');
+const mongoose = require('mongoose');
+const mongoDB = config.db.url;
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.set('views', path.join(__dirname, 'views'))
   .set('view engine', 'pug')
@@ -40,3 +46,4 @@ const server = app.listen(8080, () => {
 });
 
 module.exports = server;
+
