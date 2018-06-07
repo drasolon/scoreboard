@@ -12,7 +12,8 @@ const GameSchema = new Schema({
     name: { type: String, required: true },
     rule: { type: String, enum: ['high', 'low'], required: true },
     players: [{ type: String, required: true }],
-    rounds: [RoundSchema]
+    rounds: [RoundSchema],
+    nonEditableId: {type: String, default: mongoose.Types.ObjectId(), required: true}
 
 });
 
@@ -20,6 +21,12 @@ GameSchema
     .virtual('url')
     .get(function () {
         return '/game/' + this._id;
+    });
+
+GameSchema
+    .virtual('nonEditableUrl')
+    .get(function () {
+        return '/game/' + this.nonEditableId;
     });
 
 GameSchema

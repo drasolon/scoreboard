@@ -6,11 +6,11 @@ block content
                 ul
                 each error in errors                       
                     li #{error}           
-    .row
-        .col.mt-4
+    .row.mt-4
+        .col
             h4 New game
-    .row    
-        .col.mt-1
+    .row.mt-1    
+        .col
             form.formNewGame.needs-validation(action='/game/players', method='POST', novalidate)
                 .form-group.row
                     label.col-sm-3.col-form-label(for='inputGameName') Game name
@@ -37,8 +37,8 @@ block content
                                 label.form-check-label(for='gridRadios2') Lowest score wins round
                                 .valid-feedback Looks good!
                                 .invalid-feedback Please choose a setting.
-                .form-group.row
-                    .col.mt-2
+                .form-group.row.mt-2
+                    .col
                         button.btn(type='submit') Next      
                                       
 append scripts

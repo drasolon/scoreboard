@@ -11,7 +11,7 @@ router.post('/players', gameController.createGame);
 router.get('/players', (req, res) => res.redirect('../new'));
 
 // GET request for a game.
-router.get('/:id', gameController.getGame);
+router.get('/:id', gameController.getGame, gameController.getNonEditableGame);
 
 // POST request to create players.
 router.post('/', gameController.createPlayer);

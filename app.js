@@ -30,8 +30,9 @@ app.set('views', path.join(__dirname, 'views'))
   .use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
-    next(err);
+    return next(err);
   })
+  
   // Error handler
   .use(function (err, req, res, next) {
     // Set locals, only providing error in development

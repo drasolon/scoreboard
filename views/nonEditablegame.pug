@@ -1,0 +1,39 @@
+extends index.pug
+block content
+    if (errors)
+        .row
+            .col
+                ul
+                each error in errors                       
+                    li #{error}
+    .row.mt-5
+        .col.ml-2
+            h2 #{game.name}
+    hr
+    .row.mt-2
+        .col
+            table.table.table-borderless
+                thead
+                    tr
+                        th(scope='col') Noms
+                        each val in game.players
+                            th(scope='col') #{val}
+                tbody
+                    if (game.rounds)
+                        each round in game.rounds
+                            tr
+                                th(scope='row') #{round.name}
+                                    each score in round.scores
+                                        td #{score}
+                    if (game.totals)
+                        tr.table-lighter-color
+                            th(scope='row') Total
+                                each total in game.totals
+                                    td #{total}
+                    if (game.ranks)
+                        tr.table-light-color
+                            th(scope='row') Rank
+                                each rank in game.ranks
+                                    td #{rank}                                                                                     
+append scripts
+    script(src='/scripts/validation.js')

@@ -81,7 +81,8 @@ exports.createPlayer = [
         // Errors handling
         if (!result.isEmpty()) {
             // If errors, reload same page with error message
-            res.render('players', { errors: result.array(), numberPlayers: req.body.inputNumberPlayers, playerNames: req.body.playerNames })
+            res.render('players', { errors: result.array(), numberPlayers: req.body.inputNumberPlayers, 
+                playerNames: req.body.playerNames })
         }
         else {
             let game = new Game(
@@ -125,7 +126,8 @@ exports.addRound = [
             // If errors, reload same page with error message
             Game.findById(req.params.id, function (err, retrievedGame) {
                 if (err) { return next(err); }
-                res.render('addRound', { errors: result.array(), playerNames: retrievedGame.players, roundCounter: 'Round ' + (retrievedGame.rounds.length + 1), url: retrievedGame.url })
+                res.render('addRound', { errors: result.array(), playerNames: retrievedGame.players, 
+                    roundCounter: 'Round ' + (retrievedGame.rounds.length + 1), url: retrievedGame.url })
             })
         }
         else {
@@ -145,12 +147,34 @@ exports.getGame = function (req, res, next) {
     if (mongoose.Types.ObjectId.isValid(req.params.id)) {
         Game.findById(req.params.id, (err, retrievedGame) => {
             if (err) { return next(err); }
+
+            // If the game does not exist, call the next middleware
+            // to search for a non editable game
+            if (retrievedGame == null) {
+                return next(err);
+            }
+                res.render('game', {game: retrievedGame, hostname: req.hostname});
+        })
+    }
+    else {
+        let err = new Error;
+        err.status = 404;
+        return next(err);
+    }
+}
+
+exports.getNonEditableGame = function (req, res, next) {
+    if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+        Game.findOne({nonEditableId: req.params.id}, (err, retrievedGame) => {
+            if (err) { return next(err); }
+
+            // If the game does not exist, create an error
             if (retrievedGame == null) {
                 err = new Error;
                 err.status = 404;
                 return next(err);
             }
-            res.render('game', { playerNames: retrievedGame.players, rounds: retrievedGame.rounds, gameName: retrievedGame.name, totals: retrievedGame.totals, ranks: retrievedGame.ranks, url: retrievedGame.url })
+            res.render('nonEditableGame', {game: retrievedGame});
         })
     }
     else {
