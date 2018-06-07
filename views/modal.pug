@@ -1,0 +1,12 @@
+.modal.fade(id='deleteModal' + round._id tabindex='-1', role='dialog', aria-labelledby='deleteModal', aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title  Delete the Round
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true') ×
+      .modal-body.text-left Are you sure you want to delete this round ?
+      .modal-footer
+        form.deleteRound(action=game.url + '/delete/' + round._id)
+            button.mr-3.btn.btn-custom(type='button', data-dismiss='modal') Cancel
+            button.btn.btn-danger(type='submit') Delete

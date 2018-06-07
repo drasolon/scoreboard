@@ -22,13 +22,14 @@ block content
                 tbody
                     if (game.rounds)
                         each round in game.rounds
-                            tr
-                                th(scope='row') #{round.name}
+                            tr 
+                                th.align-middle(scope='row') #{round.name}
                                     each score in round.scores
-                                        td #{score}
-                                    td.text-right 
-                                        form.formDeleteRound(action=url + '/' + round._id, method='POST')
-                                            button(type='submit') x
+                                        td.align-middle #{score}
+                                    td
+                                        a.btn.btn-link(data-toggle="modal" data-target="#deleteModal" + round._id)   
+                                            i.fas.fa-trash
+                                        include modal.pug                                                
                     if (game.totals)
                         tr.table-lighter-color
                             th(scope='row') Total
@@ -36,25 +37,29 @@ block content
                                     td #{total}
                                 td
                     if (game.ranks)
-                        tr.table-light-color
+                        tr.table-lighter-color
                             th(scope='row') Rank
                                 each rank in game.ranks
                                     td #{rank}   
                                 td                                                                          
     .row.justify-content-center.mt-1
         .col-sm-4
-            a(role='button' class='btn btn-lg btn-block' href= game.url + "/add") Add Round           
-    .row.mt-5
-        .col Share this link to give someone full access to the scoreboard :
-            .input-group.mt-2
-                input(type='text', class='form-control', value= hostname + game.url, readonly)
-                .input-group-append
-                    button.btn.btn-outline-secondary(type='button' onclick='copyToClipboard()') Copy
-    .row.mt-2
-        .col Share this link to give someone read-only access to the scoreboard :
-            .input-group.mt-2
-                input(type='text', class='form-control', value= hostname + game.nonEditableUrl, readonly)
-                .input-group-append
-                    button.btn.btn-outline-secondary(type='button' onclick='copyToClipboard()') Copy
+            a(role='button' class='btn btn-lg btn-custom btn-block' href= game.url + "/add") Add Round
+    .row.justify-content-center.mt-1
+        .col-sm-4
+            a(role='button' class='btn btn-lg btn-custom btn-block' data-toggle='collapse' href='#collapse' aria-expanded="false") Share game
+    .collapse(id='collapse')      
+        .row.mt-5
+            .col Share this link to give someone full access to the scoreboard :
+                .input-group.mt-2
+                    input(type='text' class='form-control' value= hostname + game.url readonly)
+                    .input-group-append
+                        button.btn.btn-custom.btn-outline-secondary(type='button' onclick='copyToClipboard()') Copy
+        .row.mt-2
+            .col Share this link to give someone read-only access to the scoreboard :
+                .input-group.mt-2
+                    input(type='text' class='form-control' value= hostname + game.nonEditableUrl readonly)
+                    .input-group-append
+                        button.btn.btn-custom.btn-outline-secondary(type='button' onclick='copyToClipboard()') Copy
 append scripts
     script(src='/scripts/validation.js')

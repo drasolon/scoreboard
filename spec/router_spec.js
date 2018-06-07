@@ -83,7 +83,7 @@ describe('POST /game/:id/:round', () => {
         })
     });
     it('valid :id and valid round_id', (done) => {
-        let url = 'http://localhost:8080/game/' + game._id + '/' + game.rounds[0]._id;
+        let url = 'http://localhost:8080/game/' + game._id + '/delete/' + game.rounds[0]._id;
         request.post(url, (err, res) => {
             data = res.statusCode;
             expect(data).toEqual(302);

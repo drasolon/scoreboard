@@ -1,8 +1,8 @@
 :root {
---bg-theme-color: #ECFFFF;
---light-theme-color: #72A7A3;
---lighter-theme-color: #97C0B7;
---dark-theme-color: #31636B;
+--bg-theme-color: #FFFAEC;
+--light-theme-color: #468966;
+--lighter-theme-color: #FFB03B;
+--dark-theme-color: #8E2800;
 }
 
 
@@ -20,19 +20,20 @@ h1, h2, h3, h4 {
     border-color: var(--light-theme-color);
     box-shadow: 0 0 0 0.1rem rgba(114, 167, 163, 1);
 }
-.btn{
+.btn-custom{
     background-color: var(--light-theme-color);
     color: #fff;
     border-color: var(--light-theme-color);
 }
-.btn:hover,
-.btn:focus,
-.btn:active    {
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active    {
     background-color: var(--dark-theme-color);
     color: #FFF;
     border-color: var(--dark-theme-color);
     box-shadow: 0 0 0 0.1rem rgba(114, 167, 163, 1);
 }
+
 .table-light-color {
     background-color: var(--light-theme-color);
     color: #FFF;

@@ -64,7 +64,7 @@ GameSchema
             if (this.rule == 'low') {
                 return a.total - b.total
             }
-            else { return a.total + b.total }
+            else { return b.total - a.total }
         })
         
         // Asisgn ranks to each total    

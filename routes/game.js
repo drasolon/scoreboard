@@ -25,8 +25,8 @@ router.get('/:id/add', gameController.getRound);
 // POST request to create a round.
 router.post('/:id/add', gameController.addRound);
 
-// POST request to delete a round.
-router.post('/:id/:round', gameController.deleteRound);
+// GET request to delete a round.
+router.post('/:id/delete/:round', gameController.deleteRound);
 
 
 module.exports = router;
