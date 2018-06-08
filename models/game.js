@@ -13,7 +13,7 @@ const GameSchema = new Schema({
     rule: { type: String, enum: ['high', 'low'], required: true },
     players: [{ type: String, required: true }],
     rounds: [RoundSchema],
-    nonEditableId: {type: String, default: mongoose.Types.ObjectId(), required: true}
+    nonEditableId: { type: String, default: mongoose.Types.ObjectId(), required: true }
 
 });
 
@@ -66,22 +66,36 @@ GameSchema
             }
             else { return b.total - a.total }
         })
-        
+
         // Asisgn ranks to each total    
         for (let l = 0; l < tempArr.length; l++) {
             tempArr[l].rank = counter;
             counter++
         }
-        
+
         // Sort array by original indexes
         tempArr.sort((a, b) => {
             return a.originalIndex - b.originalIndex
-        })      
+        })
 
         // Only keep the ranks property
         for (let m = 0; m < tempArr.length; m++) {
             sortedRanks.push(tempArr[m].rank)
         }
+
+        // Add ordinal indicators to the ranks
+        for (let n = 0; n < sortedRanks.length; n++) {
+            switch (sortedRanks[n]) {
+                case 1: sortedRanks[n] = '1st';
+                    break;
+                case 2: sortedRanks[n] = '2nd';
+                    break;
+                case 3: sortedRanks[n] = '3rd';
+                    break;
+                default: sortedRanks[n] += 'th';
+            }
+        }
+
         return sortedRanks;
     })
 

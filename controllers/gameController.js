@@ -56,7 +56,7 @@ exports.createPlayer = [
         .custom((value, { req }) => {
             let duplicate = 0;
             for (let i = 0; i < req.body.playerNames.length; i++) {
-                if (value.toLowerCase() == req.body.playerNames[i].toLowerCase()) {
+                if (value.toLowerCase().trim() == req.body.playerNames[i].toLowerCase().trim()) {
                     duplicate++;
                 }
             }
