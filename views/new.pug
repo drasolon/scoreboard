@@ -6,9 +6,10 @@ block content
                 ul
                 each error in errors                       
                     li #{error}           
-    .row.mt-4
+    .row
         .col
             h4 New game
+    hr
     .row.mt-1    
         .col
             form.formNewGame.needs-validation(action='/game/players', method='POST', novalidate)

@@ -1,44 +1,55 @@
 :root {
---bg-theme-color: #FFFAEC;
---light-theme-color: #468966;
---lighter-theme-color: #FFB03B;
---dark-theme-color: #8E2800;
+--bg-theme-color: #F7F7F7;
+--light-theme-color: #d61b30;
+--dark-theme-color: #444;
 }
 
 
+
 body {
-    background-color: var(--bg-theme-color)
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: var(--bg-theme-color);
 }
 .navbar {
     background-color: var(--dark-theme-color)
 }
+#wrapper{
+    background-color: #fff; 
+}
+
 h1, h2, h3, h4 {
-    color: var(--dark-theme-color);
+    color: var(--light-theme-color);
 }
 .form-control:focus {
     
     border-color: var(--light-theme-color);
-    box-shadow: 0 0 0 0.1rem rgba(114, 167, 163, 1);
+    box-shadow: 0 0 0 0rem var(--light-theme-color);
 }
 .btn-custom{
     background-color: var(--light-theme-color);
     color: #fff;
-    border-color: var(--light-theme-color);
-}
-.btn-custom:hover,
-.btn-custom:focus,
-.btn-custom:active    {
-    background-color: var(--dark-theme-color);
-    color: #FFF;
-    border-color: var(--dark-theme-color);
-    box-shadow: 0 0 0 0.1rem rgba(114, 167, 163, 1);
 }
 
-.table-light-color {
-    background-color: var(--light-theme-color);
-    color: #FFF;
+.btn-custom:hover {
+    background-color: var(--bg-theme-color);
+    color: var(--light-theme-color);
 }
-.table-lighter-color {
-    color: #FFF;
-    background-color: var(--lighter-theme-color)
+
+.btn-custom:focus,
+.btn-custom:active    {
+    background-color: var(--bg-theme-color);
+    color: var(--light-theme-color);
+    box-shadow: none;
+}
+
+.table-results {
+    background-color: var(--bg-theme-color);
+}
+
+.table-results td{
+    color: var(--light-theme-color);
+}
+
+.delete-link:hover {
+    color: var(--light-theme-color);
 }

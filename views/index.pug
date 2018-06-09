@@ -4,13 +4,14 @@ html
         meta(charset='utf-8')
         meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700")
         link(rel='stylesheet', href='/css/style.css')
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous")
         title Scoreboard
     body
         nav.navbar.navbar-expand-lg.navbar-dark
-            .container.col-lg-6
-                a.navbar-brand(href='/index') Scoreboard
+            .container.col-lg-4
+                a.navbar-brand(href='/index') <b>Scoreboard</b>
                 button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarTogglerDemo02', aria-controls='navbarTogglerDemo02', aria-expanded='false', aria-label='Toggle navigation')
                     span.navbar-toggler-icon
                 .collapse.navbar-collapse#navbarTogglerDemo02
@@ -20,11 +21,11 @@ html
                                 span.sr-only (current)
                         li.nav-item
                             a.nav-link(href='#') About
-        .container.col-lg-6                  
+        .container.col-lg-4.mt-5.pt-2.pb-2#wrapper                
             block content               
-                .row.justify-content-center
+                .row
                     .col
-                        h1 Scoreboard
+                        h1.text-center Scoreboard
         block scripts                
             script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
             script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous")

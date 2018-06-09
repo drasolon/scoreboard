@@ -32,7 +32,7 @@ app.set('views', path.join(__dirname, 'views'))
     err.status = 404;
     return next(err);
   })
-  
+
   // Error handler
   .use(function (err, req, res, next) {
     // Set locals, only providing error in development

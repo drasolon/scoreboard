@@ -1,8 +1,9 @@
 extends index.pug
 block content
-    .row.mt-4
+    .row
         .col
             h4 Player names
+    hr
     .row.mt-1
         .col
             form.formPlayerNames.needs-validation(action='/game', method='POST', novalidate)

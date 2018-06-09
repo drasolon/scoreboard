@@ -7,8 +7,9 @@ block content
                 each error in errors                       
                     li #{error}
     .row
-        .col.mt-4
+        .col
             h4 Add scores
+    hr
     form.formScore.needs-validation(action= url + '/add', method='POST', novalidate)
         .row.form-group   
             label.col-sm-3.font-weight-bold.col-form-label(for='roundName') Round name
