@@ -6,6 +6,9 @@ block content
                 ul
                 each error in errors                       
                     li #{error}
+    .alert.alert-custom.alert-dismissible.fade.show(role='alert') You can bookmark this page to access it later
+        button.close(type='button' data-dismiss="alert" aria-label="Close")
+            span(aria-hidden="true") x
     .row.mt-4
         .col.ml-2
             h2 #{game.name}
@@ -41,10 +44,10 @@ block content
                                 each rank in game.ranks
                                     td #{rank}                                                                                                          
     .row.justify-content-center.mt-1
-        .col-4
+        .col-5
             a.btn.btn-custom.btn-block(role='button' href= game.url + "/add") Add Round
     .row.justify-content-center.mt-1
-        .col-4
+        .col-5
             a.btn.btn-custom.btn-block(role='button' data-toggle='collapse' href='#collapse' aria-expanded="false") Share game
     .collapse(id='collapse')      
         .row.mt-5

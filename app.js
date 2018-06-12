@@ -3,8 +3,10 @@ const pug = require('pug');
 const app = express();
 const path = require('path');
 const game = require('./routes/game');
-const gameInstance = require('./models/gameInstance');
+const root = require('./routes/root');
 const config = require('./config');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const mongoDB = config.db.url;
 mongoose.connect(mongoDB);
@@ -16,15 +18,23 @@ app.set('views', path.join(__dirname, 'views'))
   .set('view engine', 'pug')
   .use(express.static(__dirname + '/public'))
   .use(express.json())
-  .use(express.urlencoded())
+  .use(express.urlencoded({ extended: true }))
+  .use(session({
+    name: 'scoreboard',
+    secret: 'xFrH7jg9',
+    store: new MongoStore({ mongooseConnection: db }),
+    saveUninitialized: true,
+    resave: false,
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      /* domain: 'example.com',
+      path: '/index', */
+      expires: new Date(Date.now() + 60 * 24 * 3600 * 1000) // 60 days
+    }
+  }))
   .use('/game', game)
-  .get('/index', function (req, res) {
-    res.render('index');
-  })
-  .get('/new', function (req, res) {
-    res.render('new');
-    gameInstance.reset();
-  })
+  .use('/', root)
 
   // Catch 404 and forward to error handler
   .use(function (req, res, next) {

@@ -18,14 +18,23 @@ html
                     ul.navbar-nav.mr-auto.mt-2.mt-lg-0
                         li.nav-item
                             a.nav-link(href='/new') New Game
-                                span.sr-only (current)
                         li.nav-item
                             a.nav-link(href='#') About
-        .container.col-lg-4.mt-5.pt-2.pb-2#wrapper                
-            block content               
-                .row
-                    .col
-                        h1.text-center Scoreboard
+        .container.col-lg-4.mt-5.pt-2.pb-2                
+            block content 
+                if (games)              
+                    .row
+                        .col
+                            h3 Your games      
+                    each game in games
+                        .row.mt-3
+                            .col.p-0
+                                a(href= game.url)
+                                    .card.index-card.border-0
+                                        .card-body
+                                            h5 #{game.name}
+                                            .h6 #{game.players.join(', ')}
+
         block scripts                
             script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
             script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous")

@@ -4,8 +4,8 @@ var gameInstance = module.exports = {
     name: '',
     rule: '',
     reset: function () {
-        name = '';
-        rule = '';
+        this.name = '';
+        this.rule = '';
     }
 
 }

@@ -85,11 +85,14 @@ exports.createPlayer = [
                 playerNames: req.body.playerNames })
         }
         else {
+            
+            // Create the game and save on database
             let game = new Game(
                 {
                     name: gameInstance.name,
                     rule: gameInstance.rule,
-                    players: req.body.playerNames
+                    players: req.body.playerNames,
+                    owner: req.session.id
                 })
             game.save(function (err) {
                 if (err) { return next(err); }

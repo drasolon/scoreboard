@@ -9,6 +9,7 @@ const RoundSchema = new Schema({
 })
 
 const GameSchema = new Schema({
+    owner: { type: String, required: true },
     name: { type: String, required: true },
     rule: { type: String, enum: ['high', 'low'], required: true },
     players: [{ type: String, required: true }],
