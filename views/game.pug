@@ -19,13 +19,15 @@ block content
                 thead
                     tr
                         th(scope='col')
+                            a(href='#' onclick='reverseTable()') 
+                                i.fas.fa-sort
                         each val in game.players
                             th(scope='col') #{val}
                         td
                 tbody
                     if (game.rounds)
                         each round in game.rounds
-                            tr 
+                            tr.sortable 
                                 th.align-middle(scope='row') #{round.name}
                                     each score in round.scores
                                         td.align-middle #{score}
@@ -34,12 +36,12 @@ block content
                                             i.fas.fa-trash.delete-link
                                         include modal.pug                                                
                     if (game.totals)
-                        tr.table-results
+                        tr.table-results.sortable
                             th(scope='row') Total
                                 each total in game.totals
                                     td #{total}   
                     if (game.ranks)
-                        tr.table-results
+                        tr.table-results.sortable
                             th(scope='row') Rank
                                 each rank in game.ranks
                                     td #{rank}                                                                                                          
@@ -64,3 +66,4 @@ block content
                         button.btn.btn-custom.btn-outline-secondary#copyButtonNonEditableUrl(type='button' onclick='copyToClipboard("inputNonEditableUrl", "copyButtonNonEditableUrl")') Copy
 append scripts
     script(src='/scripts/copyToClipboard.js')
+    script(src='/scripts/reverseTable.js')
