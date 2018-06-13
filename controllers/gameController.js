@@ -5,6 +5,7 @@ const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 const gameInstance = require('../models/gameInstance');
 const mongoose = require('mongoose');
+const tools = require('../private/tools');
 
 exports.createGame = [
 
@@ -81,11 +82,13 @@ exports.createPlayer = [
         // Errors handling
         if (!result.isEmpty()) {
             // If errors, reload same page with error message
-            res.render('players', { errors: result.array(), numberPlayers: req.body.inputNumberPlayers, 
-                playerNames: req.body.playerNames })
+            res.render('players', {
+                errors: result.array(), numberPlayers: req.body.inputNumberPlayers,
+                playerNames: req.body.playerNames
+            })
         }
         else {
-            
+
             // Create the game and save on database
             let game = new Game(
                 {
@@ -129,8 +132,10 @@ exports.addRound = [
             // If errors, reload same page with error message
             Game.findById(req.params.id, function (err, retrievedGame) {
                 if (err) { return next(err); }
-                res.render('addRound', { errors: result.array(), playerNames: retrievedGame.players, 
-                    roundCounter: 'Round ' + (retrievedGame.rounds.length + 1), url: retrievedGame.url })
+                res.render('addRound', {
+                    errors: result.array(), playerNames: retrievedGame.players,
+                    roundCounter: 'Round ' + (retrievedGame.rounds.length + 1), url: retrievedGame.url
+                })
             })
         }
         else {
@@ -156,7 +161,14 @@ exports.getGame = function (req, res, next) {
             if (retrievedGame == null) {
                 return next(err);
             }
-                res.render('game', {game: retrievedGame, hostname: req.hostname});
+
+            //Format the dates
+            let temp;
+            retrievedGame.rounds.forEach(round => {
+                temp = tools.formatDate(round.date);
+                round.dateDiff = temp
+            });
+            res.render('game', { game: retrievedGame, hostname: req.hostname });
         })
     }
     else {
@@ -168,7 +180,7 @@ exports.getGame = function (req, res, next) {
 
 exports.getNonEditableGame = function (req, res, next) {
     if (mongoose.Types.ObjectId.isValid(req.params.id)) {
-        Game.findOne({nonEditableId: req.params.id}, (err, retrievedGame) => {
+        Game.findOne({ nonEditableId: req.params.id }, (err, retrievedGame) => {
             if (err) { return next(err); }
 
             // If the game does not exist, create an error
@@ -177,7 +189,7 @@ exports.getNonEditableGame = function (req, res, next) {
                 err.status = 404;
                 return next(err);
             }
-            res.render('nonEditableGame', {game: retrievedGame});
+            res.render('nonEditableGame', { game: retrievedGame });
         })
     }
     else {

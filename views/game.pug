@@ -28,7 +28,8 @@ block content
                     if (game.rounds)
                         each round in game.rounds
                             tr.sortable 
-                                th.align-middle(scope='row') #{round.name}
+                                th.align-middle(scope='row') #{round.name} <br/>
+                                    .no-style|#{round.dateDiff}
                                     each score in round.scores
                                         td.align-middle #{score}
                                     td
@@ -45,7 +46,7 @@ block content
                             th(scope='row') Rank
                                 each rank in game.ranks
                                     td #{rank}                                                                                                          
-    .row.justify-content-center.mt-1
+    .row.justify-content-center.mt-3
         .col-5
             a.btn.btn-custom.btn-block(role='button' href= game.url + "/add") Add Round
     .row.justify-content-center.mt-1

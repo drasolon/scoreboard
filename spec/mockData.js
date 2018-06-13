@@ -5,6 +5,7 @@ let mockdata = [
         name: 'test',
         rule: 'high',
         players: ['playerTest1', 'playerTest2', 'playerTest3'],
+        owner: 'oipjdogdjir',
         rounds: [
             {
                 name: 'RoundTest1',

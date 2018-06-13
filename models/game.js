@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 
 const RoundSchema = new Schema({
     name: { type: String, required: true },
-    scores: [{ type: Number, required: true }]
+    scores: [{ type: Number, required: true }],
+    date: { type: Date, default: Date.now, required: true}
 })
 
 const GameSchema = new Schema({
@@ -14,7 +15,8 @@ const GameSchema = new Schema({
     rule: { type: String, enum: ['high', 'low'], required: true },
     players: [{ type: String, required: true }],
     rounds: [RoundSchema],
-    nonEditableId: { type: String, default: mongoose.Types.ObjectId(), required: true }
+    nonEditableId: { type: String, default: mongoose.Types.ObjectId(), required: true },
+    date: { type: Date, default: Date.now, required: true}
 
 });
 
