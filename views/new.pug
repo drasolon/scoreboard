@@ -27,15 +27,28 @@ block content
                         .invalid-feedback Please choose a number of players between 2 and 10.
                 fieldset.form-group
                     .row
-                        legend.col-form-label.col-auto Does the highest or the lowest score win the round?
+                        legend.col-form-label.col-auto How should the results be presented?
                     .row
                         .col
                             .form-check
-                                input#gridRadios1.form-check-input(type='radio', name='winRule', value='high', required='')
-                                label.form-check-label(for='gridRadios1') Highest score wins round
+                                input#radio1.form-check-input(type='radio', name='resultDisplay', value='totalScore', required='')
+                                label.form-check-label(for='radio1') Show total scores (default)
                             .form-check
-                                input#gridRadios2.form-check-input(type='radio', name='winRule', value='low')
-                                label.form-check-label(for='gridRadios2') Lowest score wins round
+                                input#radio2.form-check-input(type='radio', name='resultDisplay', value='roundWon') 
+                                label.form-check-label(for='radio2') Show rounds won
+                                .valid-feedback Looks good!
+                                .invalid-feedback Please choose a setting.
+                fieldset.form-group
+                    .row
+                        legend.col-form-label.col-auto Does the highest or the lowest score win the game?
+                    .row
+                        .col
+                            .form-check
+                                input#radio3.form-check-input(type='radio', name='winRule', value='high', required='')
+                                label.form-check-label(for='radio3') Highest score wins the game
+                            .form-check
+                                input#radio4.form-check-input(type='radio', name='winRule', value='low')
+                                label.form-check-label(for='radio4') Lowest score wins the game
                                 .valid-feedback Looks good!
                                 .invalid-feedback Please choose a setting.
                 .form-group.row.mt-2

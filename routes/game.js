@@ -1,6 +1,5 @@
-'use strict';
-
 const express = require('express');
+
 const router = express.Router();
 const gameController = require('../controllers/gameController');
 
@@ -17,7 +16,7 @@ router.get('/:id', gameController.getGame, gameController.getNonEditableGame);
 router.post('/', gameController.createPlayer);
 
 // GET request to redirect user on the "new game" page.
-router.get('/', (req, res)  => res.redirect('new'));
+router.get('/', (req, res) => res.redirect('new'));
 
 // GET request for the "addRound" page.
 router.get('/:id/add', gameController.getRound);

@@ -1,11 +1,12 @@
-'use strict';
+const gameInstance = {
+  name: '',
+  rule: '',
+  display: '',
+  reset: () => {
+    this.name = '';
+    this.rule = '';
+    this.display = '';
+  }
+};
 
-var gameInstance = module.exports = {
-    name: '',
-    rule: '',
-    reset: function () {
-        this.name = '';
-        this.rule = '';
-    }
-
-}
+module.exports = gameInstance;

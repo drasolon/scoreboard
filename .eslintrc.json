@@ -1,0 +1,17 @@
+{
+    "extends": "airbnb-base",
+    "rules": {
+      "no-unused-vars": [1, {"vars": "local", "args": "none"}],
+      "no-param-reassign": 0,
+      "comma-dangle": ["error", {
+        "arrays": "never",
+        "objects": "never",
+        "imports": "never",
+        "exports": "never",
+        "functions": "ignore"
+    }],
+    "no-console": "off",
+    "consistent-return": "off",
+    "prefer-destructuring": "off"
+    }
+}
