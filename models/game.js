@@ -28,25 +28,36 @@ GameSchema
   .virtual('nonEditableUrl')
   .get(function getNonEditableUrl() { return `/game/${this.nonEditableId}`; });
 
+// Display total scores or total rounds won depending on the game settings
 GameSchema
-  .virtual('totals')
-  .get(function getTotals() {
-    const totals = [];
-    for (let i = 0; i < this.rounds.length; i += 1) {
-      for (let j = 0; j < this.rounds[i].scores.length; j += 1) {
-        if (typeof totals[j] === 'undefined') {
-          totals[j] = 0;
+  .virtual('totalScore')
+  .get(function getTotalScore() {
+    const totalScore = [];
+    this.rounds.forEach((round) => {
+      round.scores.forEach((score, index, array) => {
+        if (typeof totalScore[index] === 'undefined') {
+          totalScore[index] = 0;
         }
-        totals[j] += this.rounds[i].scores[j];
-      }
-    }
-    return totals;
+        if ((this.display === 'roundWon')) {
+          if (this.rule === 'high') {
+            if (score === Math.max(...array)) {
+              totalScore[index] += 1;
+            }
+          } else if (score === Math.min(...array)) {
+            totalScore[index] += 1;
+          }
+        } else {
+          totalScore[index] += score;
+        }
+      });
+    });
+    return totalScore;
   });
 
 GameSchema
   .virtual('ranks')
   .get(function getRanks() {
-    const totals = this.totals;
+    const totalScore = this.totalScore;
     const tempArr = [];
     let counter = 1;
     const sortedRanks = [];
@@ -54,8 +65,8 @@ GameSchema
     // We need to assign a rank to each total and sort the array
     // in the same order as the player list, or the total list.
     // Create array of totals with their original indexes
-    for (let k = 0; k < totals.length; k += 1) {
-      tempArr.push({ originalIndex: k, total: totals[k] });
+    for (let k = 0; k < totalScore.length; k += 1) {
+      tempArr.push({ originalIndex: k, total: totalScore[k] });
     }
 
     // Sort array by asc or desc

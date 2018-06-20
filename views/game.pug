@@ -36,10 +36,10 @@ block content
                                         a.btn.btn-link(data-toggle="modal" data-target="#deleteModal" + round._id)   
                                             i.fas.fa-trash.delete-link
                                         include modal.pug                                                
-                    if (game.totals)
+                    if (game.totalScore)
                         tr.table-results.sortable
                             th(scope='row') Total
-                                each total in game.totals
+                                each total in game.totalScore
                                     td #{total}   
                     if (game.ranks)
                         tr.table-results.sortable
