@@ -12,14 +12,14 @@ html
         nav.navbar.navbar-expand-lg.navbar-dark
             .container.col-lg-4
                 a.navbar-brand(href='/index') <b>Scoreboard</b>
-                button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarTogglerDemo02', aria-controls='navbarTogglerDemo02', aria-expanded='false', aria-label='Toggle navigation')
+                button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarToggler', aria-controls='navbarTogglerDemo02', aria-expanded='false', aria-label='Toggle navigation')
                     span.navbar-toggler-icon
-                .collapse.navbar-collapse#navbarTogglerDemo02
-                    ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+                .collapse.navbar-collapse#navbarToggler                
+                    ul.navbar-nav.ml-auto
                         li.nav-item
                             a.nav-link(href='/new') New Game
                         li.nav-item
-                            a.nav-link(href='#') About
+                            a.nav-link(href='/about') About
         .container.col-lg-4.mt-5.pt-2.pb-2                
             block content 
                 .jumbotron.jumbotron-custom
@@ -37,7 +37,7 @@ html
                     each game in games
                         .row.mt-3
                             .col
-                                a(href= game.url)
+                                a.no-decoration(href= game.url)
                                     .card.index-card.border-0
                                         .card-body
                                             h5.d-inline #{game.name}

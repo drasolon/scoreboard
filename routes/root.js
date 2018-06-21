@@ -11,5 +11,6 @@ router.get('/new', (req, res) => {
   gameInstance.reset();
   return res.render('new');
 });
-
+// GET request to rend the about page
+router.get('/about', (req, res) => res.render('about'));
 module.exports = router;
