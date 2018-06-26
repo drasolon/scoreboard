@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet');
 const path = require('path');
 const game = require('./routes/game');
 const root = require('./routes/root');
@@ -16,6 +17,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.set('views', path.join(__dirname, 'views'))
   .set('view engine', 'pug')
+  .use(helmet())
   .use(express.static(`${__dirname}/public`))
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
@@ -30,7 +32,7 @@ app.set('views', path.join(__dirname, 'views'))
       httpOnly: true,
       /* domain: 'example.com',
       path: '/index', */
-      expires: new Date(Date.now() + (60 * 24 * 3600 * 1000)) // 60 days
+      expires: new Date(Date.now() + (365 * 24 * 3600 * 1000)) // 365 days
     }
   }))
   .use('/game', game)
@@ -53,7 +55,6 @@ app.set('views', path.join(__dirname, 'views'))
     res.render('error');
   });
 const server = app.listen(8080, () => {
-  console.log('Server is running');
 });
 
 module.exports = server;
