@@ -5,6 +5,7 @@ const indexController = require('../controllers/indexController');
 const gameInstance = require('../models/gameInstance');
 
 // GET request to render index page
+router.get('/', indexController.getGames);
 router.get('/index', indexController.getGames);
 // GET request to render new game page
 router.get('/new', (req, res) => {
