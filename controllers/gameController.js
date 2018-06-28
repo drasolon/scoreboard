@@ -5,6 +5,8 @@ const gameInstance = require('../models/gameInstance');
 const mongoose = require('mongoose');
 const tools = require('../private/tools');
 
+const arr = Array.from(new Array(25), (val, index) => index + 1);
+
 exports.createGame = [
 
   // Validate fields.
@@ -17,7 +19,7 @@ exports.createGame = [
     .isLength({ min: 1 }).withMessage('Number of players must be specified.')
     .isInt()
     .withMessage('Number of players must be a number between 2 and 10.')
-    .isIn([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    .isIn(arr)
     .withMessage('Number of players must be a number between 2 and 10'),
 
   body('winRule').isIn(['high', 'low']).withMessage('Choose only between the two radio buttons'),
