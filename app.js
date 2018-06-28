@@ -40,7 +40,7 @@ app.set('views', path.join(__dirname, 'views'))
 
   // Catch 404 and forward to error handler
   .use((req, res, next) => {
-    const err = new Error('Not Found');
+    const err = new Error('Page Not Found');
     err.status = 404;
     return next(err);
   })

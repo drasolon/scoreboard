@@ -1,7 +1,12 @@
 extends index.pug
 block content
-    .row.justify-content-center
-        .col
-            h1= message
-            h2= error.status
-            pre #{error.stack}
+  .row
+      .col
+          h1= error.status + ' ' + message
+  .row.mt-2
+      .col 
+        p The page you are looking for does not exist.
+        <a href='/'>Return to home.</a>
+  .row
+      .col
+          pre #{error.stack}
