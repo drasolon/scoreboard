@@ -23,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'))
   .use(express.urlencoded({ extended: true }))
   .use(session({
     name: 'scoreboard',
-    secret: 'xFrH7jg9',
+    secret: config.cookie.secret,
     store: new MongoStore({ mongooseConnection: db }),
     saveUninitialized: true,
     resave: false,

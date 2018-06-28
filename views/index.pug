@@ -11,7 +11,7 @@ html
     body
         nav.navbar.navbar-expand-lg.navbar-dark
             .container.col-lg-4
-                a.navbar-brand(href='/') <b>Scoreboard</b>
+                a.navbar-brand(href='/') <b>SaveMyScore</b>
                 button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarToggler', aria-controls='navbarTogglerDemo02', aria-expanded='false', aria-label='Toggle navigation')
                     span.navbar-toggler-icon
                 .collapse.navbar-collapse#navbarToggler                
@@ -26,14 +26,16 @@ html
                     h1.display-4 Hello!
                     p.lead This is a simple app to keep scores.
                     hr.my-4
-                    p You can save the scores of up to 10 players and share them with editable 
-                        |or non-editable links.
+                    p You can save the scores of up to 10 players and share them with your friends.
                     a.btn.btn-custom.btn-lg.mt-3(href='/new', role='button') Let's go
 
                 if (games)              
                     .row
                         .col
-                            h3 Your games      
+                            .h3 Your games
+                                small
+                                  | 
+                                  a(href='/?clear=true') (Clear the list)
                     each game in games
                         .row.mt-3
                             .col
