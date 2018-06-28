@@ -1,32 +1,39 @@
 extends index.pug
 block content
-  .col
-    h1 About this website
-    p.mt-3 Hi, I am <b>David Rasolondramanitra</b> and I built this website.
-      | 
-      |If you want me to add a feature or if you want to add it yourself,
-      | 
-      |you can leave a comment below or go to my <a href='http://github.com/drasolon'>Github page</a>.
-  .col.mt-5
-    h3 How was this made ? 
-    ul
-      li This webapp is a <a href='https://nodejs.org/en/'>Nodejs</a> Application
+  .row
+    .col
+      h1 About this website
+      p.mt-4 Hi, I am <b>David Rasolondramanitra</b> and I built this website.
         | 
-        |which uses <a href='http://expressjs.com/'>Express.js</a>.
-      li It runs on an <a href='https://www.ovh.com/com/'>OVH</a> virtual server
+        |If you want me to add a feature or if you want to add it yourself,
         | 
-        |running Debian with <a href='https://www.nginx.com/'>Nginx</a> and
-        | 
-        |<a href= 'https://www.phusionpassenger.com/'>Passenger</a>.
-      li The frontend is styled with <a href='https://getbootstrap.com/'>Bootstrap</a>.
-      li The database is <a href='https://www.mongodb.com/'>MongoDB</a>
-        | 
-        |and uses <a href='http://mongoosejs.com/'>Mongoose</a> as an ODM.
-  .col.mt-5
-    h3 For how long are the games saved ?
-    p The games are never deleted.
-  .col.mt-5
-    h3 Updates
-    ul
-      li 27/06/2018 Released version 1.0
+        |you can leave a comment below or go to my <a href='http://github.com/drasolon'>Github page</a>.
+  .row.mt-4
+    .col
+      h3 How was this made ? 
+      ul
+        li This webapp is a <a href='https://nodejs.org/en/'>Nodejs</a> Application
+          | 
+          |which uses <a href='http://expressjs.com/'>Express.js</a>.
+        li It runs on an <a href='https://www.ovh.com/com/'>OVH</a> virtual server
+          | 
+          |running Debian with <a href='https://www.nginx.com/'>Nginx</a> and
+          | 
+          |<a href= 'https://www.phusionpassenger.com/'>Passenger</a>.
+        li The frontend is styled with <a href='https://getbootstrap.com/'>Bootstrap</a>.
+        li The database is <a href='https://www.mongodb.com/'>MongoDB</a>
+          | 
+          |and uses <a href='http://mongoosejs.com/'>Mongoose</a> as an ODM.
+  .row.mt-4
+    .col
+      h3 For how long are the games saved ?
+      p The games are never deleted.
+  .row.mt-4    
+    .col
+      h3 Updates
+      ul
+        li 27/06/2018 Released version 1.0
+  .row.mt-4
+    .col
+      include disqus.pug
     

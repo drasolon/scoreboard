@@ -1,5 +1,5 @@
 doctype html
-html
+html(lang="en")
     head
         meta(charset='utf-8')
         meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
@@ -7,12 +7,12 @@ html
         link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700")
         link(rel='stylesheet', href='/css/style.css')
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous")
-        title Scoreboard
+        title SaveMyScore
     body
-        nav.navbar.navbar-expand-lg.navbar-dark
+        nav.navbar(role='navigation').navbar-expand-lg.navbar-dark
             .container.col-lg-4
-                a.navbar-brand(href='/') <b>SaveMyScore</b>
-                button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarToggler', aria-controls='navbarTogglerDemo02', aria-expanded='false', aria-label='Toggle navigation')
+                a.navbar-brand(href='/') <strong>SaveMyScore</strong>
+                button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarToggler', aria-controls='navbarToggler', aria-expanded='false', aria-label='Toggle navigation')
                     span.navbar-toggler-icon
                 .collapse.navbar-collapse#navbarToggler                
                     ul.navbar-nav.ml-auto
@@ -23,13 +23,13 @@ html
         .container.col-lg-4.mt-5.pt-2.pb-2                
             block content 
                 .jumbotron.jumbotron-custom
-                    h1.display-4 Hello!
+                    h1.display-4 Save my Score
                     p.lead This is a simple app to keep scores.
                     hr.my-4
                     p You can save the scores of up to 10 players and share them with your friends.
                     a.btn.btn-custom.btn-lg.mt-3(href='/new', role='button') Let's go
 
-                if (games)              
+                if ((games) && (games.length > 0))             
                     .row
                         .col
                             .h3 Your games
