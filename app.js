@@ -49,6 +49,7 @@ app.set('views', path.join(__dirname, 'views'))
   .use((err, req, res, next) => {
     // Set locals, only providing error in development
     res.locals.message = err.message;
+    res.locals.status = err.status;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
     // Render the error page
     res.status(err.status || 500);
