@@ -1,13 +1,21 @@
 doctype html
 html(lang="en")
     head
+        // Global site tag (gtag.js) - Google Analytics
+        script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-121560815-1')
+        script.
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-121560815-1');
         meta(charset='utf-8')
         meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        meta(name='description' content='A free online scoreboard app to keep scores forever.')
+        title Save My Score : a free online scoreboard app
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700")
         link(rel='stylesheet', href='/css/style.css')
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous")
-        title SaveMyScore
     body
         nav.navbar(role='navigation').navbar-expand-lg.navbar-dark
             .container.col-lg-4
