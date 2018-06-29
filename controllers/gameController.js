@@ -12,7 +12,7 @@ exports.createGame = [
   // Validate fields.
   body('inputGameName').trim()
     .isLength({ min: 1 }).withMessage('Game name must be specified.')
-    .matches('^[a-zA-Z0-9 ]+$')
+    .matches('^[a-zA-Z0-9À-ÿ- ]+$')
     .withMessage('Game name must be alphanumeric characters'),
 
   body('inputNumberPlayers').trim()
@@ -55,7 +55,7 @@ exports.createPlayer = [
   // Validate fields.
   body('playerNames.*').trim()
     .isLength({ min: 1 }).withMessage('Player name must be specified.')
-    .matches('^[a-zA-Z0-9 ]+$')
+    .matches('^[a-zA-Z0-9À-ÿ- ]+$')
     .withMessage('Player name must be in alphanumeric characters')
 
     // check if there are duplicate names
@@ -112,7 +112,7 @@ exports.addRound = [
   // Validate fields.
   body('roundName').trim()
     .isLength({ min: 1 }).withMessage('Round name must be specified.')
-    .matches('^[a-zA-Z0-9 ]+$')
+    .matches('^[a-zA-Z0-9À-ÿ- ]+$')
     .withMessage('Round name must only contains alphanumeric characters'),
 
   body('playerScores.*').trim()
