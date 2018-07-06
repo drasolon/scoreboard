@@ -100,7 +100,13 @@ GameSchema
           break;
         case 3: sortedRanks[n] = '3rd';
           break;
-        default: sortedRanks[n] += 'th';
+        case 21: sortedRanks[n] = '3rd';
+          break;
+        case 22: sortedRanks[n] = '21st';
+          break;
+        case 23: sortedRanks[n] = '22nd';
+          break;
+        default: sortedRanks[n] += '23rd';
       }
     }
 
