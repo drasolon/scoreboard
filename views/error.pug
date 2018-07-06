@@ -1,12 +1,12 @@
 extends index.pug
 block content
   .row
-      .col
-          h1= status + ' ' + message
+    .col
+      h1= status + ' ' + message
   .row.mt-2
-      .col 
-        p The page you are looking for does not exist.
-        <a href='/'>Return to home.</a>
+    .col 
+      p The page you are looking for does not exist.
+      <a href='/'>Return to home.</a>
   .row
-      .col
-          pre #{error.stack}
+    .col
+      pre #{error.stack}

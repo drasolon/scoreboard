@@ -15,23 +15,28 @@ block content
             table.table.table-borderless
                 thead
                     tr
-                        th(scope='col') Noms
+                        th(scope='col')
+                            a(href='#' onclick='reverseTable()') 
+                                i.fas.fa-sort
                         each val in game.players
                             th(scope='col') #{val}
+                        td
                 tbody
                     if (game.rounds)
                         each round in game.rounds
-                            tr
+                            tr.sortable
                                 th(scope='row') #{round.name}
                                     each score in round.scores
                                         td #{score}
-                    if (game.totals)
-                        tr.table-lighter-color
+                    if (game.totalScore)
+                        tr.table-results.sortable
                             th(scope='row') Total
-                                each total in game.totals
+                                each total in game.totalScore
                                     td #{total}
                     if (game.ranks)
-                        tr.table-light-color
+                        tr.table-results.sortable
                             th(scope='row') Rank
                                 each rank in game.ranks
                                     td #{rank}                                                                                     
+append scripts
+  script(src='/scripts/reverseTable.js')
