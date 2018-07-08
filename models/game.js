@@ -71,7 +71,7 @@ GameSchema
 
     // Sort array by asc or desc
     tempArr.sort((a, b) => {
-      if (this.rule === 'low') {
+      if ((this.rule === 'low') && (this.display !== 'roundWon')) {
         return a.total - b.total;
       }
       return b.total - a.total;
