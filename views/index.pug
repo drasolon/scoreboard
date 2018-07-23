@@ -38,6 +38,14 @@ html(lang="en")
                   small
                     | 
                     a(href='/?clear=true') (clear the list)
+              if (amountOfPages > 1)
+                .col.text-right 
+                  a(href='/page/' + previousPage) <-
+                  - var n = 1;
+                  while n <= amountOfPages
+                    a(href='/page/' + n) #{n}
+                    - n++
+                  a(href='/page/' + nextPage) ->
             each game in games
               .row.mt-2
                 .col
@@ -50,9 +58,9 @@ html(lang="en")
           .col  
             .jumbotron.jumbotron-custom
                 h1.display-4 Save my Score
-                p.lead This is a simple free app to keep scores.
+                p.lead This is a simple free app to save the scores of your games.
                 hr.my-4
-                p You can save the scores of up to 25 players and share them with your friends.
+                p You can save the scores of up to 25 players per games and share them with your friends.
                 a.btn.btn-custom.btn-lg.mt-3(href='/new', role='button') Let's go
   block scripts                
     script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
