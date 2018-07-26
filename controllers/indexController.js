@@ -6,7 +6,7 @@ exports.getPagination = async (req, res, next) => {
   const gamesPerPage = 5;
   // If the user click on a pagination link, skip the previous games
   const gamesToSkip = (currentPage - 1) * gamesPerPage;
-  const promiseNumberOfGames = Game.count({ owner: req.session.id }).exec();
+  const promiseNumberOfGames = Game.countDocuments({ owner: req.session.id }).exec();
 
   try {
     // Calculate the amount of pagination page needed

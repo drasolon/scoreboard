@@ -10,8 +10,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 const mongoDB = config.db.url;
-mongoose.connect(mongoDB);
-mongoose.Promise = global.Promise;
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
