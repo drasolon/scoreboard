@@ -41,8 +41,8 @@ html(lang="en")
                   small
                     | 
                     a(href='/?clear=true') (clear the list)
-              if (amountOfPages > 1)
-                include ./pagination.pug
+            if (amountOfPages > 1)
+              include ./pagination.pug
             each game in games
               .row.mt-2
                 .col

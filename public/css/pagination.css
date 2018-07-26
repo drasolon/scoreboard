@@ -10,3 +10,6 @@
 .page-link:focus {
   box-shadow: none;
 }
+#pagination {
+  height: auto;
+}

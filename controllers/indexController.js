@@ -4,7 +4,6 @@ const tools = require('../private/tools');
 exports.getPagination = async (req, res, next) => {
   const currentPage = (req.params.page == null ? 1 : Number(req.params.page));
   const gamesPerPage = 5;
-  const previousPage = (currentPage === 1 ? 1 : (currentPage - 1));
   // If the user click on a pagination link, skip the previous games
   const gamesToSkip = (currentPage - 1) * gamesPerPage;
   const promiseNumberOfGames = Game.count({ owner: req.session.id }).exec();
@@ -12,9 +11,6 @@ exports.getPagination = async (req, res, next) => {
   try {
     // Calculate the amount of pagination page needed
     const amountOfPages = Math.ceil(await promiseNumberOfGames / gamesPerPage);
-    const nextPage = (currentPage === amountOfPages ? amountOfPages : (currentPage + 1));
-    res.locals.previousPage = previousPage;
-    res.locals.nextPage = nextPage;
     res.locals.amountOfPages = amountOfPages;
     res.locals.gamesToSkip = gamesToSkip;
     res.locals.currentPage = currentPage;
@@ -32,8 +28,6 @@ exports.getGames = async (req, res, next) => {
     return res.render('index');
   }
 
-  const previousPage = res.locals.previousPage;
-  const nextPage = res.locals.nextPage;
   const amountOfPages = res.locals.amountOfPages;
   const gamesToSkip = res.locals.gamesToSkip;
   const currentPage = res.locals.currentPage;
@@ -47,7 +41,7 @@ exports.getGames = async (req, res, next) => {
       game.dateDiff = temp;
     });
 
-    return res.render('index', { games: retrievedGames, amountOfPages, previousPage, nextPage, currentPage });
+    return res.render('index', { games: retrievedGames, amountOfPages, currentPage });
   } catch (err) {
     return next(err);
   }

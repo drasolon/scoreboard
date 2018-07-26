@@ -1,26 +1,28 @@
-.col
-  nav(aria-label="Game list pagination")
-    ul.pagination.pagination-sm.justify-content-end
-      if (currentPage >= 4)
-        li.page-item
-          a.page-link(href='/page/' + 1) first
-      - var n = currentPage;
-      - var i = currentPage - 3;
-      - var j = currentPage + 3;
-      if currentPage > 4
-        li.page-item
-          a.page-link(href='') ...
-      while (i > 0) && (i < currentPage)
-        li.page-item
-          a.page-link(href='/page/' + i) #{i}
-        - i++
-      while (n <= j) && (n < amountOfPages)
-        li.page-item
-          a.page-link(href='/page/' + n) #{n}
-        - n++
-      if j < amountOfPages
-        li.page-item
-          a.page-link(href='') ...
-      if (currentPage != amountOfPages)
-        li.page-item
-          a.page-link(href='/page/' + amountOfPages) last
+.row.mt-2
+  .col
+    nav(aria-label="Game list pagination")
+      ul.pagination.pagination-sm.justify-content-end
+        if (currentPage > 4)
+          li.page-item
+            a.page-link(href='/page/' + 1) first
+        - var n = currentPage;
+        - var i = currentPage - 3;
+        - var j = currentPage + 3;
+        if currentPage > 5
+          li.page-item
+            a.page-link(href='') ...
+        while (i > -2) && (i < currentPage)
+          if (i > 0)
+            li.page-item
+              a.page-link(href='/page/' + i) #{i}
+          -i++ 
+        while (n <= j) && (n < amountOfPages)
+          li.page-item
+            a.page-link(href='/page/' + n) #{n}
+          - n++
+        if j < amountOfPages
+          li.page-item
+            a.page-link(href='') ...
+        if (currentPage != amountOfPages)
+          li.page-item
+            a.page-link(href='/page/' + amountOfPages) last
