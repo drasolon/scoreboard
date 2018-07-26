@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 const app = express();
 const mongoDB = config.db.url;
 mongoose.connect(mongoDB, { useNewUrlParser: true }, (err) => {
-  app.use((req, res, next) => next(err));
+  if (err) { app.use((req, res, next) => next(err)); }
 });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
