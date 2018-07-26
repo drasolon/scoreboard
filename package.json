@@ -19,14 +19,14 @@
     "mongoose": "^5.2.5",
     "npm": "^6.2.0",
     "pug": "^2.0.3",
-    "request": "^2.87.0"
+    "request": "^2.87.0",
+    "snyk": "^1.89.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.13.0",
     "jasmine": "^3.1.0",
-    "nodemon": "^1.18.3",
-    "snyk": "^1.83.0"
+    "nodemon": "^1.18.3"
   }
 }
