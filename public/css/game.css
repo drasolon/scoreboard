@@ -1,0 +1,9 @@
+.table-results {
+  background-color: var(--bg-theme-color);
+}
+.table-results td{
+  color: var(--light-theme-color);
+}
+.delete-link:hover {
+  color: var(--light-theme-color);
+}

@@ -1,0 +1,12 @@
+.page-link, .page-link:hover {
+  color: var(--light-theme-color);
+}
+.page-link:hover {
+  background-color: var(--bg-theme-color);
+}
+.page-link {
+  border: none;
+}
+.page-link:focus {
+  box-shadow: none;
+}

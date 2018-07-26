@@ -33,8 +33,9 @@ a.no-decoration, a.no-decoration:hover {
   text-decoration: none;
 }
 .index-card:hover {
-  background-color: #f2f2f2;
+  background-color: var(--bg-theme-color);
 }
+
 .alert-custom {
   color: #9d1521;
   background-color: #f9d2d6;
@@ -57,13 +58,4 @@ a.no-decoration, a.no-decoration:hover {
   background-color: var(--bg-theme-color);
   color: var(--light-theme-color);
   box-shadow: none;
-}
-.table-results {
-  background-color: var(--bg-theme-color);
-}
-.table-results td{
-  color: var(--light-theme-color);
-}
-.delete-link:hover {
-  color: var(--light-theme-color);
 }
