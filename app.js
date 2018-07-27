@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 const mongoDB = config.db.url;
+
 mongoose.connect(mongoDB, { useNewUrlParser: true }, (err) => {
   app.use((req, res, next) => next(err));
 });
