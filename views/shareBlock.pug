@@ -1,0 +1,19 @@
+.row.justify-content-center.mt-3
+  .col-5
+    a.btn.btn-custom.btn-block(role='button' href= game.url + "/add") Add Round
+.row.justify-content-center.mt-1
+  .col-5
+    a.btn.btn-custom.btn-block(role='button' data-toggle='collapse' href='#collapse' aria-expanded="false") Share game
+.collapse(id='collapse')      
+  .row.mt-5
+    .col Share this link to give someone full access to the scoreboard :
+      .input-group.mt-2
+        input#inputUrl(type='text' class='form-control' value= hostname + game.url readonly)
+        .input-group-append
+          button.btn.btn-custom.btn-outline-secondary#copyButtonUrl(type='button' onclick='copyToClipboard("inputUrl", "copyButtonUrl")') Copy
+  .row.mt-3
+    .col Share this link to give someone read-only access to the scoreboard :
+      .input-group.mt-2
+        input#inputNonEditableUrl(type='text' class='form-control' value= hostname + game.nonEditableUrl readonly)
+        .input-group-append
+          button.btn.btn-custom.btn-outline-secondary#copyButtonNonEditableUrl(type='button' onclick='copyToClipboard("inputNonEditableUrl", "copyButtonNonEditableUrl")') Copy

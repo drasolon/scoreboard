@@ -1,0 +1,46 @@
+if (errors)
+  .row
+    .col
+      ul
+      each error in errors                       
+        li #{error}
+.alert.alert-custom.alert-dismissible.fade.show(role='alert') You can bookmark this page to access it later
+  button.close(type='button' data-dismiss="alert" aria-label="Close")
+    span(aria-hidden="true") x
+.row.mt-4
+  .col.ml-2
+    h2 #{game.name}
+hr
+.row
+  .col
+    table.table.table-borderless
+      thead
+        tr
+          th(scope='col')
+            a(href='#' onclick='reverseTable()') 
+              i.fas.fa-sort
+          each val in game.players
+            th(scope='col') #{val}
+          td
+      tbody
+        if (game.rounds)
+          each round in game.rounds
+            tr.sortable 
+              th.align-middle(scope='row') #{round.name} <br/>
+                .no-style|#{round.dateDiff}
+                each score in round.scores
+                  td.align-middle #{score}
+                td
+                  a.btn.btn-link(data-toggle="modal" data-target="#deleteModal" + round._id)   
+                    i.fas.fa-trash.delete-link
+                  include modal.pug                                                
+        if (game.totalScore)
+          tr.table-results.sortable
+            th(scope='row') Total
+              each total in game.totalScore
+                td #{total}   
+        if (game.ranks)
+          tr.table-results.sortable
+            th(scope='row') Rank
+              each rank in game.ranks
+                td #{rank}

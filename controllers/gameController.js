@@ -167,12 +167,14 @@ exports.getGame = (req, res, next) => {
         return next(err);
       }
 
-      // Format the dates
+      // Format the dates of the rounds
       let tempDate;
       retrievedGame.rounds.forEach((round) => {
         tempDate = tools.formatDate(round.date);
         round.dateDiff = tempDate;
       });
+
+      //
       return res.render('game', { game: retrievedGame, hostname: req.hostname });
     });
   } else {
@@ -191,8 +193,17 @@ exports.getNonEditableGame = (req, res, next) => {
       if (retrievedGame == null) {
         err = new Error();
         err.status = 404;
+        err.message = 'This game does not exists';
         return next(err);
       }
+
+      // Format the dates of the rounds
+      let tempDate;
+      retrievedGame.rounds.forEach((round) => {
+        tempDate = tools.formatDate(round.date);
+        round.dateDiff = tempDate;
+      });
+
       return res.render('nonEditableGame', { game: retrievedGame });
     });
   } else {

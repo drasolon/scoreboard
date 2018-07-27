@@ -1,70 +1,7 @@
 extends index.pug
 block content
-    if (errors)
-        .row
-            .col
-                ul
-                each error in errors                       
-                    li #{error}
-    .alert.alert-custom.alert-dismissible.fade.show(role='alert') You can bookmark this page to access it later
-        button.close(type='button' data-dismiss="alert" aria-label="Close")
-            span(aria-hidden="true") x
-    .row.mt-4
-        .col.ml-2
-            h2 #{game.name}
-    hr
-    .row
-        .col
-            table.table.table-borderless
-                thead
-                    tr
-                        th(scope='col')
-                            a(href='#' onclick='reverseTable()') 
-                                i.fas.fa-sort
-                        each val in game.players
-                            th(scope='col') #{val}
-                        td
-                tbody
-                    if (game.rounds)
-                        each round in game.rounds
-                            tr.sortable 
-                                th.align-middle(scope='row') #{round.name} <br/>
-                                    .no-style|#{round.dateDiff}
-                                    each score in round.scores
-                                        td.align-middle #{score}
-                                    td
-                                        a.btn.btn-link(data-toggle="modal" data-target="#deleteModal" + round._id)   
-                                            i.fas.fa-trash.delete-link
-                                        include modal.pug                                                
-                    if (game.totalScore)
-                        tr.table-results.sortable
-                            th(scope='row') Total
-                                each total in game.totalScore
-                                    td #{total}   
-                    if (game.ranks)
-                        tr.table-results.sortable
-                            th(scope='row') Rank
-                                each rank in game.ranks
-                                    td #{rank}                                                                                                          
-    .row.justify-content-center.mt-3
-        .col-5
-            a.btn.btn-custom.btn-block(role='button' href= game.url + "/add") Add Round
-    .row.justify-content-center.mt-1
-        .col-5
-            a.btn.btn-custom.btn-block(role='button' data-toggle='collapse' href='#collapse' aria-expanded="false") Share game
-    .collapse(id='collapse')      
-        .row.mt-5
-            .col Share this link to give someone full access to the scoreboard :
-                .input-group.mt-2
-                    input#inputUrl(type='text' class='form-control' value= hostname + game.url readonly)
-                    .input-group-append
-                        button.btn.btn-custom.btn-outline-secondary#copyButtonUrl(type='button' onclick='copyToClipboard("inputUrl", "copyButtonUrl")') Copy
-        .row.mt-3
-            .col Share this link to give someone read-only access to the scoreboard :
-                .input-group.mt-2
-                    input#inputNonEditableUrl(type='text' class='form-control' value= hostname + game.nonEditableUrl readonly)
-                    .input-group-append
-                        button.btn.btn-custom.btn-outline-secondary#copyButtonNonEditableUrl(type='button' onclick='copyToClipboard("inputNonEditableUrl", "copyButtonNonEditableUrl")') Copy
+    include ./gameTemplate.pug                                                                                                         
+    include ./shareBlock.pug
 append scripts
     script(src='/scripts/copyToClipboard.js')
     script(src='/scripts/reverseTable.js')
