@@ -30,8 +30,9 @@ app.set('views', path.join(__dirname, 'views'))
     saveUninitialized: true,
     resave: false,
     cookie: {
-      secure: false,
+      secure: true,
       httpOnly: true,
+      sameSite: true,
       /* domain: 'example.com',
       path: '/index', */
       expires: new Date(Date.now() + (365 * 24 * 3600 * 1000)) // 365 days
