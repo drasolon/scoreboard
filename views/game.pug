@@ -56,13 +56,13 @@ block content
         .row.mt-5
             .col Share this link to give someone full access to the scoreboard :
                 .input-group.mt-2
-                    input#inputUrl(type='text' class='form-control' value= hostname + game.url readonly)
+                    input#inputUrl(type='text' class='form-control' value= 'https://' + hostname + game.url readonly)
                     .input-group-append
                         button.btn.btn-custom.btn-outline-secondary#copyButtonUrl(type='button' onclick='copyToClipboard("inputUrl", "copyButtonUrl")') Copy
         .row.mt-3
             .col Share this link to give someone read-only access to the scoreboard :
                 .input-group.mt-2
-                    input#inputNonEditableUrl(type='text' class='form-control' value= hostname + game.nonEditableUrl readonly)
+                    input#inputNonEditableUrl(type='text' class='form-control' value= 'https://' + hostname + game.nonEditableUrl readonly)
                     .input-group-append
                         button.btn.btn-custom.btn-outline-secondary#copyButtonNonEditableUrl(type='button' onclick='copyToClipboard("inputNonEditableUrl", "copyButtonNonEditableUrl")') Copy
 append scripts
