@@ -10,23 +10,23 @@
   "author": "David Rasolondramanitra",
   "license": "ISC",
   "dependencies": {
-    "connect-mongo": "^2.0.1",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "express-validator": "^5.3.0",
-    "helmet": "^3.13.0",
-    "mongodb": "^3.1.1",
-    "mongoose": "^5.2.5",
-    "npm": "^6.2.0",
-    "pug": "^2.0.3",
-    "request": "^2.87.0",
-    "snyk": "^1.89.0"
+    "connect-mongo": "^2.0.3",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "express-validator": "^5.3.1",
+    "helmet": "^3.20.0",
+    "mongodb": "^3.2.7",
+    "mongoose": "^5.6.8",
+    "npm": "^6.10.2",
+    "pug": "^2.0.4",
+    "request": "^2.88.0",
+    "snyk": "^1.208.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.13.0",
-    "jasmine": "^3.1.0",
-    "nodemon": "^1.18.3"
+    "eslint-plugin-import": "^2.18.2",
+    "jasmine": "^3.4.0",
+    "nodemon": "^1.19.1"
   }
 }
