@@ -1,34 +1,33 @@
 {
-    // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
-    // Pointez pour afficher la description des attributs existants.
-    // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/app.js",
-            "skipFiles": [
-                "${workspaceFolder}/node_modules/**/*.js",
-                "<node_internals>/**/*.js"
-              ]
-        },
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Lancer Chrome sur localhost",
-            "url": "http://localhost:8080/index",
-            "webRoot": "${workspaceFolder}",
-            "skipFiles": [
-                "${workspaceFolder}/node_modules/**/*.js",
-                "<node_internals>/**/*.js",
-                "${workspaceFolder}/node_modules/",
-                "node_modules",
-                "node_modules/**",
-                "${workspaceFolder}/node_modules"
-              ]
-        }
-    ]
+  // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
+  // Pointez pour afficher la description des attributs existants.
+  // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/app.js",
+      "skipFiles": [
+        "${workspaceFolder}/node_modules/**/*.js",
+        "<node_internals>/**/*.js"
+      ]
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Lancer Chrome sur localhost",
+      "url": "http://localhost:8080/index",
+      "webRoot": "${workspaceFolder}",
+      "skipFiles": [
+        "${workspaceFolder}/node_modules/**/*.js",
+        "<node_internals>/**/*.js",
+        "${workspaceFolder}/node_modules/",
+        "node_modules",
+        "node_modules/**",
+        "${workspaceFolder}/node_modules"
+      ]
+    }
+  ]
 }
