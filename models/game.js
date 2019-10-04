@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const uuidv4 = require("uuid/v4");
 const Schema = mongoose.Schema;
 
 const RoundSchema = new Schema({
@@ -16,8 +15,7 @@ const GameSchema = new Schema({
   players: [{ type: String, required: true }],
   rounds: [RoundSchema],
   nonEditableId: {
-    type: String,
-    default: uuidv4,
+    type: mongoose.Types.ObjectId,
     required: true
   },
   date: { type: Date, default: Date.now, required: true }

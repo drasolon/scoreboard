@@ -98,7 +98,8 @@ exports.createPlayer = [
         rule: gameInstance.rule,
         players: req.body.playerNames,
         owner: req.session.id,
-        display: gameInstance.display
+        display: gameInstance.display,
+        nonEditableId:  mongoose.Types.ObjectId()
       });
       game.save((err) => {
         if (err) { return next(err); }

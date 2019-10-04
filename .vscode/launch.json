@@ -15,6 +15,16 @@
       ]
     },
     {
+      "name": "Launch via nodemon",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "nodemon",
+      "program": "${workspaceFolder}/app.js",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "Lancer Chrome sur localhost",
