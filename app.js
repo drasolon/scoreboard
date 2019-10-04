@@ -1,15 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
 const path = require('path');
 const game = require('./routes/game');
 const root = require('./routes/root');
-const config = require('./config');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
-
 const app = express();
-const mongoDB = config.db.url;
+const mongoDB = process.env.DB_URL;
 mongoose.connect(mongoDB, { useNewUrlParser: true }, (err) => {
   if (err) { app.use((req, res, next) => next(err)); }
 });
@@ -24,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'))
   .use(express.urlencoded({ extended: true }))
   .use(session({
     name: 'scoreboard',
-    secret: config.cookie.secret,
+    secret: process.env.COOKIE_SECRET,
     store: new MongoStore({ mongooseConnection: db }),
     saveUninitialized: true,
     resave: false,
