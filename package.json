@@ -4,7 +4,7 @@
   "description": "This is an app to keep scores",
   "main": "app.js",
   "scripts": {
-    "test": "snyk test && jasmine",
+    "test": "jasmine",
     "start": "nodemon app.js"
   },
   "author": "David Rasolondramanitra",
@@ -19,8 +19,7 @@
     "mongoose": "^5.6.8",
     "npm": "^6.10.2",
     "pug": "^2.0.4",
-    "request": "^2.88.0",
-    "snyk": "^1.208.0"
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
