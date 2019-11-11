@@ -1,21 +1,21 @@
-   image: node:latest
+image: node:latest
 
-    stages:
-      - build
-      - test
+stages:
+  - build
+  - test
 
-    cache:
-      paths:
-        - node_modules/
+cache:
+  paths:
+    - node_modules/
 
-    install_dependencies:
-      stage: build
-      script:
-        - npm install
-      artifacts:
-        paths:
-          - node_modules/
+install_dependencies:
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
 
-    test:
-      stage: test
-      script: npm test
+test:
+  stage: test
+  script: npm test
