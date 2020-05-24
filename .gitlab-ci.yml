@@ -1,8 +1,18 @@
 image: node:latest
 
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
+
 stages:
   - build
   - test
+  - deploy
 
 cache:
   paths:
@@ -21,3 +31,15 @@ install_dependencies:
 test:
   stage: test
   script: npm test
+
+deploy_prod:
+  stage: deploy
+  script:
+    - ssh scoreboard@savemyscore.ovh "cd /var/www/scoreboard/code && git checkout master && git pull origin master && npm install --production && npm prune --production && exit"
+    - ssh scoreboard@savemyscore.ovh "passenger-config restart-app --ignore-app-not-running --ignore-passenger-not-running /var/www/scoreboard/code && exit"
+  environment:
+    name: production
+    url: https://savemyscore.ovh
+  when: manual
+  only:
+    - master
