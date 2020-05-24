@@ -21,8 +21,8 @@ cache:
 install_dependencies:
   stage: build
   script:
-    - export REACT_APP_DB_URL=$DB_URL # set REACT_APP variables before build command
-    - export REACT_APP_COOKIE_SECRET=$COOKIE_SECRET
+    - echo DB_URL=$DB_URL > .env # set REACT_APP variables before build command
+    - echo COOKIE_SECRET=$COOKIE_SECRET >> .env
     - npm install
   artifacts:
     paths:
