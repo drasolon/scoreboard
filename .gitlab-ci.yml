@@ -11,6 +11,7 @@ cache:
 install_dependencies:
   stage: build
   script:
+    - export REACT_APP_SECRET_API_KEY=$API_KEY # set REACT_APP variables before build command
     - npm install
   artifacts:
     paths:

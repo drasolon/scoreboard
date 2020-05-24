@@ -7,9 +7,8 @@ const root = require("./routes/root");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
-const config = require("./config.js");
 const app = express();
-const mongoDB = config.db.url;
+const mongoDB = process.env.DB_URL;
 mongoose.connect(mongoDB, { useNewUrlParser: true }, err => {
   if (err) {
     app.use((req, res, next) => next(err));
@@ -28,7 +27,7 @@ app
   .use(
     session({
       name: "scoreboard",
-      secret: config.cookie.secret,
+      secret: process.env.COOKIE_SECRET,
       store: new MongoStore({ mongooseConnection: db }),
       saveUninitialized: true,
       resave: false,
