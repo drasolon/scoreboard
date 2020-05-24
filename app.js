@@ -8,8 +8,8 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const app = express();
-const mongoDB = process.env.DB_URL;
-mongoose.connect(mongoDB, { useNewUrlParser: true }, err => {
+const mongoDB = process.env.DB_URL || REACT_APP_DB_URL;
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false  }, err => {
   if (err) {
     app.use((req, res, next) => next(err));
   }
@@ -27,7 +27,7 @@ app
   .use(
     session({
       name: "scoreboard",
-      secret: process.env.COOKIE_SECRET,
+      secret: process.env.COOKIE_SECRET || REACT_APP_COOKIE_SECRET,
       store: new MongoStore({ mongooseConnection: db }),
       saveUninitialized: true,
       resave: false,

@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+const id = mongoose.Types.ObjectId();
 const mockdata = [
   {
     name: 'test',
@@ -14,7 +16,8 @@ const mockdata = [
         name: 'RoundTest2',
         scores: [780, 96, 0]
       }
-    ]
+    ],
+    nonEditableId: id
   },
   {
     gnan: 'rerse'
