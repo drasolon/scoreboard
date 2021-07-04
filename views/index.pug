@@ -2,12 +2,12 @@ doctype html
 html(lang="en")
   head
     // Global site tag (gtag.js) - Google Analytics
-    script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-121560815-1')
-    script.
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-121560815-1');
+    //- script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-121560815-1')
+    //- script.
+    //-     window.dataLayer = window.dataLayer || [];
+    //-     function gtag(){dataLayer.push(arguments);}
+    //-     gtag('js', new Date());
+    //-     gtag('config', 'UA-121560815-1');
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     meta(name='description' content='A free online scoreboard app to keep scores of your games forever. Give a name to your games and rounds and share them with your friends.')
@@ -31,6 +31,8 @@ html(lang="en")
                       a.nav-link(href='/new') New Game
                   li.nav-item
                       a.nav-link(href='/about') About
+                  li.nav-item
+                      script(type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="drasolon" data-color="#d61b30" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#ffffff" data-font-color="#ffffff" data-coffee-color="#FFDD00").
     .container.col-lg-4.mt-4.pt-2.pb-2                
       block content
         if ((games) && (games.length > 0))
